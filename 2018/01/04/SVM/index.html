@@ -100,7 +100,8 @@
 <meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/4.png">
 <meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/5.png">
 <meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/6.png">
-<meta property="og:updated_time" content="2018-01-07T09:36:36.569Z">
+<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/7.png">
+<meta property="og:updated_time" content="2018-01-07T21:25:40.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM">
 <meta name="twitter:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中分析数据的监督式学习模型。对于二分类问题，SVM将实例表示为空间中的点，通过超平面将实例正确分类且尽可能宽的间隔分开">
@@ -386,9 +387,9 @@
 <script type="math/tex; mode=display">
 f(x) = \mbox{sign}(w^Tx+b)\tag{2.1}</script><p>对于二分类问题一般假设 $y$ 的标签为 $\pm 1$，在实际问题中我们一般是取 $0$ 或者 $1$，当然也可以取其他的值，但究其根本来说对于超平面要做的事情只是将样本分开，而两类对应的函数值在超平面的符号正好相反，所以取 $\pm1$ 优点是可以直观感受，并且推导的时候更加简便。从下面两张图中可以看出来二者的差别仅仅是要求的分类超平面平移，而具体的推导过程其实并无太大差别，所以在这里我们也让 $y$ 的取值为 $\pm1$。</p>
 <p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\1.png" style="zoom:55%"></p>
-<p>定义 $yf(x)$ 为函数间隔，当样本正确分类的时候 $yf(x) \geqslant 0$，但是我们不能最大化这个函数间隔，因为当超平面 $(w,b)$ 确定时，等比例放大 $w$ 和 $b$ 得到的函数间隔会以相同的比例增大，而超平面 $(kw,kb)$ 确还是之前的超平面。所以便引出了几何间隔</p>
+<p>定义 $yf(x)$ 为函数间隔，当样本正确分类的时候 $yf(x) \geqslant 0$，但是我们不能最大化这个函数间隔，因为当超平面 $(w,b)$ 确定时，等比例放大 $w$ 和 $b$ 得到的函数间隔会以相同的比例增大，而超平面 $(kw,kb)$ 却还是之前的超平面。所以便引出了几何间隔</p>
 <script type="math/tex; mode=display">
-\frac{yf(x)}{\left \| w \right \|}\tag{2.2}</script><p>其中 ${\left | w \right |}$ 表示 $L_2$ 范数。对于某条样本来说，该样本离超平面的间隔越大则分类的置信度越高，为了使分类的置信度尽量高，我们可以最大化几何间隔。然而对于样本空间中任意点 $x_i$ 到超平面都有一个几何间隔，那么我们到底最大化哪些点的几何间隔呢？</p>
+ \frac{yf(x)}{\left \| w \right \|}\tag{2.2}</script><p>其中 ${\left | w \right |}$ 表示 $L_2$ 范数。实际上这个几何间隔就是分类正确的点到直线距离公式。某条样本来说，该样本离超平面的间隔越大则分类的置信度越高，为了使分类的置信度尽量高，我们可以最大化几何间隔。然而对于样本空间中任意点 $x_i$ 到超平面都有一个几何间隔，那么我们到底最大化哪些点的几何间隔呢？</p>
 <p>从下图中看到离超平面越远的点我们越不需要关注，因为它们的几何间隔肯定比正好在间隔边界上的点（背景色不透明的点）大。所以我们只需要最大化这些点的几何间隔就可以了，而这些在间隔边界上的点便被称为<strong>支持向量</strong>。</p>
 <p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\2.png" style="zoom:65%"></p>
 <p>对于任意支持向量 $x_s$ 都有</p>
@@ -456,7 +457,9 @@ L(w,b,\alpha)&=\frac{1}{2} \left \| w \right \|^2  + \sum_i^n{\alpha_i [1-y_i(w^
 <h6 id="二次规划求解"><a href="#二次规划求解" class="headerlink" title="二次规划求解"></a>二次规划求解</h6><p>不失一般性，假设选取 $\alpha_1$ 和 $\alpha_2$，固定剩余变量，省略不包含  $\alpha_1$ 和 $\alpha_2$ 的常数项，则问题可以写成</p>
 <script type="math/tex; mode=display">
 \begin{alignat}{2}
-\min_{\alpha_1,\alpha_2}\quad & W(\alpha_1,\alpha_2)=\frac{1}{2}K_{11}\alpha_1^2+\frac{1}{2}K_{22}\alpha_2^2+\alpha_1\alpha_2K_{12}y_1y_2-(\alpha_1+\alpha_2)+\alpha_1y_1v_1+\alpha_2y_2v_2\tag{2.15}
+\min_{\alpha_1,\alpha_2}\quad & W(\alpha_1,\alpha_2)=\frac{1}{2}K_{11}\alpha_1^2+\frac{1}{2}K_{22}\alpha_2^2+\alpha_1\alpha_2K_{12}y_1y_2\\
+&\quad\quad\quad\quad\quad\ \ \ -(\alpha_1+\alpha_2)+\alpha_1y_1v_1+\alpha_2y_2v_2\tag{2.15}
+\\
 \\
 \mbox{s.t.}\quad
 &\alpha_1y_1+\alpha_2y_2=-\sum_{i=3}^n\alpha_iy_i\tag{2.16} = \zeta\\
@@ -492,36 +495,38 @@ v_i&=\sum_{j=3}^n\alpha_jy_jK_{ij} \\
 \begin{align*}
 (K_{11}+K_{22}-2K_{12}){\alpha_2^{new}}'&=y_2\zeta (K_{11}-K_{12})+y_2(v_1-v_2)-y_1y_2+1\\
 &=y_2[\zeta (K_{11}-K_{12})+v_1-v_2-y_1+y_2]\\
-\end{align*} \tag{2.23}</script><p>然后将式(2.18)和式(2.20)带入上式替换掉 $\zeta$，$v_1$ 和 $v_2$ 化简我们可以得到</p>
+\end{align*} \tag{2.23}</script><p>然后将式(2.18)和式(2.20)带入上式替换掉 $\zeta$，$v_1$ 和 $v_2$ 化简我们可以得到等式右边为</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-(K_{11}+K_{22}-2K_{12}){\alpha_2^{new}}'&=y_2[(K_{11}+K_{22}-2K_{12})\alpha_2^{old}y_2+{f}'(x_1)-{f}'(x_2)+y_2-y_1]\\
+y_2[(K_{11}+&K_{22}-2K_{12})\alpha_2^{old}y_2+{f}'(x_1)-{f}'(x_2)+y_2-y_1]\\
 &=(K_{11}+K_{22}-2K_{12})\alpha_2^{old}+y_2[({f}'(x_1)-y_1)-(f^*(x_2)-y_2)]\\
 &=(K_{11}+K_{22}-2K_{12})\alpha_2^{old}+y_2(E_1-E_2) \tag{2.24}
-\end{align*}</script><p>其中 $E<em>i​$ 表示误差，令 $\eta=K</em>{11}+K<em>{22}-2K</em>{12}​$ 带入可得到</p>
+\end{align*}</script><p>其中 $E_i$ 表示误差令</p>
 <script type="math/tex; mode=display">
-{\alpha_2^{new}}'=\alpha_2^{old}+\frac{y_2(E_1-E_2)}{\eta} \tag{2.25}</script><p>再由式(2.2.3.6)我们可以得到</p>
+\eta=K_{11}+K_{22}-2K_{12}\tag{2.25}</script><p>带入式(2.24)可得到</p>
 <script type="math/tex; mode=display">
-\alpha_1^{new}=\alpha_1^{old}+y_1y_2(\alpha_2^{old}-\alpha_2^{new}) \tag{2.26}</script><p>以上便是未考虑约束 $0 \leqslant \alpha_i \leqslant C, \  i=1,2​$ 的结果，当考虑该约束时 ${\alpha_2^{new}}’​$ 应该满足约束 $L \leq {\alpha_2^{new}}’\leq H​$ ，我们可以将约束用二维坐标系表示，根据 $\alpha_1y_1+\alpha_2y_2=\zeta ​$ 可得</p>
+{\alpha_2^{new}}'=\alpha_2^{old}+\frac{y_2(E_1-E_2)}{\eta} \tag{2.26}</script><p>再由式(2.20)我们可以得到</p>
+<script type="math/tex; mode=display">
+\alpha_1^{new}=\alpha_1^{old}+y_1y_2(\alpha_2^{old}-\alpha_2^{new}) \tag{2.27}</script><p>以上便是未考虑约束 $0 \leqslant \alpha_i \leqslant C, \  i=1,2​$ 的结果，当考虑该约束时 ${\alpha_2^{new}}’​$ 应该满足约束 $L \leq {\alpha_2^{new}}’\leq H​$ ，我们可以将约束用二维坐标系表示，根据 $\alpha_1y_1+\alpha_2y_2=\zeta ​$ 可得</p>
 <p>若 $y_1 \neq y_2$</p>
 <script type="math/tex; mode=display">
-\alpha_1^{new}-\alpha_2^{new}=\alpha_1^{old}-\alpha_2^{old}=k \tag{2.27}</script><p>其中 $k​$ 是一个常量，为 $\zeta ​$ 或者 $-\zeta ​$，其在坐标系中的截距如下图所示</p>
+\alpha_1^{new}-\alpha_2^{new}=\alpha_1^{old}-\alpha_2^{old}=k \tag{2.28}</script><p>其中 $k​$ 是一个常量，为 $\zeta ​$ 或者 $-\zeta ​$，其在坐标系中的截距如下图所示</p>
 <p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\3.png" style="zoom:60%"></p>
 <p>则我们可以得到在这种情况下</p>
 <script type="math/tex; mode=display">
 \begin{align*}
  &L = max(0,\alpha_2^{old}-\alpha_1^{old}) \\
  &H = min(C,C+\alpha_2^{old}-\alpha_1^{old}) \\
-\end{align*}\tag{2.28}</script><p>同理若 $y_1 = y_2​$</p>
+\end{align*}\tag{2.29}</script><p>同理若 $y_1 = y_2​$</p>
 <script type="math/tex; mode=display">
-\alpha_1^{new}+\alpha_2^{new}=\alpha_1^{old}+\alpha_2^{old}=k\tag{2.29}</script><p>其在坐标系中的截距如下图所示</p>
+\alpha_1^{new}+\alpha_2^{new}=\alpha_1^{old}+\alpha_2^{old}=k\tag{2.30}</script><p>其在坐标系中的截距如下图所示</p>
 <p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\4.png" style="zoom:60%"></p>
 <p>在这种情况下</p>
 <script type="math/tex; mode=display">
 \begin{align*}
  &L = max(0,\alpha_1^{old}+\alpha_2^{old}-C) \\
  &H = min(C,\alpha_1^{old}+\alpha_2^{old})\\
-\end{align*} \tag{2.30}</script><p>综上所述便得到了经剪辑（考虑约束 $0 \leqslant \alpha_i \leqslant C, \  i=1,2​$）后 $\alpha_2^{new}​$ 的解为</p>
+\end{align*} \tag{2.31}</script><p>综上所述便得到了经剪辑（考虑约束 $0 \leqslant \alpha_i \leqslant C, \  i=1,2​$）后 $\alpha_2^{new}​$ 的解为</p>
 <script type="math/tex; mode=display">
 \alpha_2^{new} = \begin{cases}
 L,&\alpha_2^{new*} < L\\
@@ -529,31 +534,31 @@ L,&\alpha_2^{new*} < L\\
 \alpha_2^{new*} ,&L \leq \alpha_2^{new*} \leq H\\
 \\
 H,&\alpha_2^{new*} >H\\
-\end{cases}\tag{2.31}</script><p>等等我们还忘记了一件事，这里的 $C​$ 是我们引入进来的，那么不加 $C​$ 会是什么情况呢。当不加限制 $C​$ 时即我们的 $C​$ 取无穷大，则我们可以得到下面的式子</p>
+\end{cases}\tag{2.32}</script><p>等等我们还忘记了一件事，这里的 $C​$ 是我们引入进来的，那么不加 $C​$ 会是什么情况呢。当不加限制 $C​$ 时即我们的 $C​$ 取无穷大，则我们可以得到下面的式子</p>
 <script type="math/tex; mode=display">
 \begin{cases}
 L=max(0,\alpha_2^{old}-\alpha_1^{old}),H =\infty&if\quad y_1 \neq y_2\\
 \\
 L=0,H=\alpha_1^{old}+\alpha_2^{old}&if\quad y_1=y_2\\
 
-\end{cases}\tag{2.32}</script><p>即当 $y_1 \neq y_2​$ 时</p>
+\end{cases}\tag{2.33}</script><p>即当 $y_1 \neq y_2​$ 时</p>
 <script type="math/tex; mode=display">
 \alpha_2^{new} = \begin{cases}
 L,&\alpha_2^{new*} < L\\
 \\
 \alpha_2^{new*} ,&L \leq \alpha_2^{new*}\\
 
-\end{cases}\tag{2.33}</script><p>当 $y_1=y_2​$ 时</p>
+\end{cases}\tag{2.34}</script><p>当 $y_1=y_2​$ 时</p>
 <script type="math/tex; mode=display">
 \alpha_2^{new} = \begin{cases}
 \alpha_2^{new*} ,&\alpha_2^{new*} \leq H\\
 \\
 H,&\alpha_2^{new*} >H\\
-\end{cases}\tag{2.34}</script><h6 id="计算偏移项b"><a href="#计算偏移项b" class="headerlink" title="计算偏移项b"></a>计算偏移项b</h6><p>在每次完成两个变量的优化后，都需要重新计算偏移项 $b$。对于任意支持向量 $(x_s,y_s)$ 根据KKT条件都会存在 $y_sf(x_s)=1$，即</p>
+\end{cases}\tag{2.35}</script><h6 id="计算偏移项b"><a href="#计算偏移项b" class="headerlink" title="计算偏移项b"></a>计算偏移项b</h6><p>在每次完成两个变量的优化后，都需要重新计算偏移项 $b$。对于任意支持向量 $(x_s,y_s)$ 根据KKT条件都会存在 $y_sf(x_s)=1$，即</p>
 <script type="math/tex; mode=display">
-y_s(\sum_{i\in S}\alpha_iy_ix_i^Tx_s+b)=1\tag{2.35}</script><p>其中 $S​$ 表示所有支持向量的集合，我们已经讨论过了，求得的分类函数 $f(x)​$ 中只需要计算支持向量的内积，而非支持向量的 $\alpha_i=0​$ 。理论上我们可以选取任意的支持向量获取 $b​$ 值，但实际上我们上是通过计算所有支持向量的均值。</p>
+y_s(\sum_{i\in S}\alpha_iy_ix_i^Tx_s+b)=1\tag{2.36}</script><p>其中 $S​$ 表示所有支持向量的集合，我们已经讨论过了，求得的分类函数 $f(x)​$ 中只需要计算支持向量的内积，而非支持向量的 $\alpha_i=0​$ 。理论上我们可以选取任意的支持向量获取 $b​$ 值，但实际上我们上是通过计算所有支持向量的均值。</p>
 <script type="math/tex; mode=display">
-b=\frac{1}{|S|}\sum_{s\in S}(y_s-\sum_{i\in S}\alpha_iy_ix_i^Tx_s)\tag{2.36}</script><h6 id="选择变量"><a href="#选择变量" class="headerlink" title="选择变量"></a>选择变量</h6><p>SMO算法在选择变量优化时首先选择一个不满足KKT条件的变量，然后第二个变量的选择标准是希望可以使得第二个变量更新前后的变化足够大。</p>
+b=\frac{1}{|S|}\sum_{s\in S}(y_s-\sum_{i\in S}\alpha_iy_ix_i^Tx_s)\tag{2.37}</script><h6 id="选择变量"><a href="#选择变量" class="headerlink" title="选择变量"></a>选择变量</h6><p>SMO算法在选择变量优化时首先选择一个不满足KKT条件的变量，然后第二个变量的选择标准是希望可以使得第二个变量更新前后的变化足够大。</p>
 <p>首先说什么是变化足够大，我们可以看 ${\alpha_2^{new}}’$ 的更新公式，我们发现该更新依赖于 $E_1-E_2$，为了加快计算可以简单的选择 $\alpha_2$ 使其对应的 $|E_1-E_2|$ 最大（假设 $\alpha_1$ 已选则 $E_1$ 已知）。就这样不断的在选定 $\alpha_1$ 的情况下选择更新 $\alpha_2$ 。</p>
 <p>再说根据不满足KKT条件来选择第一个变量，求解该不等式约束问题是通过KKT条件，即要求</p>
 <script type="math/tex; mode=display">
@@ -565,7 +570,7 @@ b=\frac{1}{|S|}\sum_{s\in S}(y_s-\sum_{i\in S}\alpha_iy_ix_i^Tx_s)\tag{2.36}</sc
 \\
 y_i f(x_i) - 1 \geqslant 0\
 
-\end{cases}\tag{2.37}</script><p>所以对于任意训练样本 $(x_i, y_i)​$，总有 $\alpha_i=0​$ 或者 $y_i f(x_i) = 1​$。</p>
+\end{cases}\tag{2.38}</script><p>所以对于任意训练样本 $(x_i, y_i)​$，总有 $\alpha_i=0​$ 或者 $y_i f(x_i) = 1​$。</p>
 <ul>
 <li>$\alpha_i = 0$，即 $y_i f(x_i) \geq 1$，对应样本点位于最大间隔正确分类的一面，也可以理解为乘子为0，约束不起作用</li>
 <li>$\alpha_i &gt; 0$，即 $y_i f(x_i) = 1$，对应样本点位于最大间隔的边界上，称之为支持向量</li>
@@ -578,7 +583,7 @@ y_i f(x_i) - 1 \geqslant 0\
 <p>当引入松弛变量后（建议先阅读软间隔）我们会发现此时 $\alpha_i$ 还可以等于 $C$。当 $\alpha_i=C$ 时可以得到 $y_if(x_i) \leq 1$（因为此时引入的松弛变量 $\xi_i \geq 0$）。所以我们还可以选取当 $y_if(x_i) \leq 1$ 时 $\alpha_i \leq C$ 而原本 $\alpha_i=C$ 的 $\alpha_i$。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过求解对偶问题我们得到了最优解 $\alpha$，通过 $\alpha$ 我们就可以得到原始问题的解 $w$ 以及 $b$ 得到我们想要的分类函数了。其形式如下所示</p>
 <script type="math/tex; mode=display">
-f(x)=\mbox{sign}(\sum_{i=1}^n\alpha_iy_ix_ix^T+b)\tag{2.38}</script><h3 id="线性不可分"><a href="#线性不可分" class="headerlink" title="线性不可分"></a>线性不可分</h3><p>我们之假定了训练样本是线性可分的，即存在某超平面可以将训练样本正确分类，而在实际的问题中，原始样本空间或许并不能由某个超平面正确分类。对于这样的问题可以通过将原始的样本空间映射到更高维的特征空间，使得样本在特征空间中线性可分。比如下图中的数据原本是线性不可分的，而我们从第三个维度却是线性可分的，而核函数就是在解决这个问题的。</p>
+f(x)=\mbox{sign}(\sum_{i=1}^n\alpha_iy_ix_ix^T+b)\tag{2.39}</script><h3 id="线性不可分"><a href="#线性不可分" class="headerlink" title="线性不可分"></a>线性不可分</h3><p>我们之假定了训练样本是线性可分的，即存在某超平面可以将训练样本正确分类，而在实际的问题中，原始样本空间或许并不能由某个超平面正确分类。对于这样的问题可以通过将原始的样本空间映射到更高维的特征空间，使得样本在特征空间中线性可分。比如下图中的数据原本是线性不可分的，而我们从第三个维度却是线性可分的，而核函数就是在解决这个问题的。</p>
 <p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\5.png" style="zoom:50%"></p>
 <h4 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h4><p>原始的用非线性可分的数据去训练一个线性分类器，通常的做法就是将原始样本空间映射到特征空间，然后在特征空间中训练线性分类器。而核函数的方法则是直接将特征空间的映射以及内积融合在一起，并且解决了映射函数维度爆炸的问题（多项式核中将会举一个简单的例子）。</p>
 <p>首先定义 $\phi(x_i)$ 表示样本 $x_i$ 映射到特征空间的特征向量，定义核函数如下所示</p>
@@ -623,7 +628,7 @@ f(x)=(\sum_{i=1}^n\alpha_iy_ix_i)^Tx+b\Rightarrow f(\phi(x))=\sum_{i=1}^n\alpha_
 <li><p>sigmoid核</p>
 <p>$\beta&gt;0$，$\theta&lt;0$</p>
 <script type="math/tex; mode=display">
-\kappa(x_i,x_j)=\tanh(\beta x_i^Tx_j+\theta)\tag{3.10}</script></li>
+\kappa(x_i,x_j)=\tanh(\beta x_i^Tx_j+\theta)</script></li>
 </ul>
 <h3 id="软间隔"><a href="#软间隔" class="headerlink" title="软间隔"></a>软间隔</h3><p>在之前的讨论中，我们都假定了训练数据的样本空间或者特征空间是线性可分的，然而在实际任务中往往很难确定是否线性可分。缓解该问题的办法是允许支持向量机在一些样本上出错，所以便引入了软间隔，或者说松弛变量，即允许某些样本不满足约束 $y_if(x_i)\geq1$，我们对每条样本引入一个松弛变量 $\xi_i$ 将约束条件变为</p>
 <script type="math/tex; mode=display">
@@ -637,8 +642,9 @@ y_i(w^Tx_i+b)\geq1-\xi_i\tag{4.1}</script><p>则相应的目标函数变为</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 
-&L(w,b,\xi,\alpha,\mu)=\frac{1}{2} \left \| w \right \|^2  + C\sum_{i=1}^n\xi_i+ \sum_i^n{\alpha_i [1-y_i(w^Tx_i+b)-\xi_i]} -\sum_{i=1}^n\mu\xi_i\\
-\end{align*}\tag{4.3}</script><p>其中 $ \alpha_i \geq 0, \mu_i \geq 0​$ 同理可以转化为对偶问题先求 $L​$ 对 $w​$，$b​$ 以及 $\xi​$  极小</p>
+L(w,b,\xi,\alpha,\mu)=&\frac{1}{2} \left \| w \right \|^2+ C\sum_{i=1}^n\xi_i\\ 
+& + \sum_i^n{\alpha_i [1-y_i(w^Tx_i+b)-\xi_i]} -\sum_{i=1}^n\mu\xi_i\\
+\end{align*}\tag{4.3}</script><p>其中 $ \alpha_i \geq 0, \mu_i \geq 0$ 同理可以转化为对偶问题先求 $L$ 对 $w$，$b$ 以及 $\xi$  极小</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 &\frac{\partial  L}{\partial  w}=0 \Rightarrow w=\sum_{i=1}^n \alpha_i y_i x_i\tag{4.4}\\
@@ -692,7 +698,63 @@ L_{hinge}=max(0,1-y_if(x_i))\tag{5.4}</script><p>所以目标函数变为</p>
 \min_{w,b}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^nmax(0,1-y_if(x_i))\tag{5.5}</script><p>由 $\xi_i\geq0$ 可以将上式重新写为</p>
 <script type="math/tex; mode=display">
 \min_{w,b,\xi_i}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^n\xi_i \tag{5.6}</script><p>而这和我们引入软件隔的目标函数正好一样。</p>
-<h3 id="支持向量机回归"><a href="#支持向量机回归" class="headerlink" title="支持向量机回归"></a>支持向量机回归</h3><p>挖坑</p>
+<h3 id="支持向量回归"><a href="#支持向量回归" class="headerlink" title="支持向量回归"></a>支持向量回归</h3><p>支持向量机通过最大间隔来得到分类模型，其将样本限定在决策边界的两边，$y_if(x_i)&gt;0$ 才认为其正确分类，而支持向量回归（Support Vector Regression，SVR）恰好相反，SVR将样本点限制在决策边界之内，SVR认为只有在决策边界内的样本才是正确分类的样本，下图中的 $\varepsilon $ 为能够容忍的错误。<br><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\7.png" style="zoom:60%"></p>
+<p>所以SVR的目标函数为</p>
+<script type="math/tex; mode=display">
+\min_{w,b}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^nL(f(x_i),y_i)\tag{6.1}</script><p>其中</p>
+<script type="math/tex; mode=display">
+L(f(x_i),y_i)=\begin{cases}
+|f(x_i)-y_i|-\varepsilon, \\&|f(x_i)-y_i|>\varepsilon
+\\
+0,&otherwise
+\end{cases}\tag{6.2}</script><p>引入松弛变量 $\xi$，则目标函数变为</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\min_{w,b}\quad&\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^n\xi_i\\
+\mbox{s.t.}\quad& w^Tx_i + b - y_i \leq \varepsilon + \xi_i, \quad i=1,2,\cdots,n\\
+& y_i  - (w^Tx_i + b)  \leq \varepsilon - \xi_i, \quad i=1,2,\cdots,n\\
+&\xi_i \geq 0, \quad i=1,2,\cdots,n
+\end{align*}\tag{6.3}</script><p>引入拉格朗日乘子 $\alpha​$，${\alpha}’​$ 和 $\mu​$，由拉格朗日乘子法可以得到拉格朗日函数</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+L(w,b,\alpha,{\alpha}'_i,\mu,\xi)=&\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^n\xi_i + \sum_{i=1}^n{\alpha_i (f(x_i)-y_i-\varepsilon-\xi_i)}  \\
+&+ \sum_{i=1}^n{\alpha}'_i (y_i-f(x_i)-\varepsilon+\xi_i)-\sum_{i=1}^n\mu_i\xi_i
+\end{align*}\tag{6.4}</script><p>分别对 $w​$，$b​$ 和 $\xi​$ 求偏导为零可以得到</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+&\frac{\partial  L}{\partial  w}=0 \Rightarrow w=\sum_{i=1}^n ({\alpha}'_i-\alpha_i) x_i\tag{6.5}\\
+&\frac{\partial  L}{\partial  b}=0 \Rightarrow \sum_{i=1}^n ({\alpha}'_i-\alpha_i) =0\tag{6.6}\\
+&\frac{\partial  L}{\partial  \xi}=0 \Rightarrow C- \alpha_i+{\alpha}'_i-\mu_i=0\tag{6.7}\\
+
+\end{align*}</script><p>将式(6.5~7)带入式(6.4)得到（推导过程类似式(2.10)）</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+L(\alpha,{\alpha}'_i,\mu)=&\sum_{i=1}^n\left[ \left({\alpha}'_i-\alpha_i\right)y_i -({\alpha}'_i+\alpha_i)\varepsilon\right]\\
+&- \frac{1}{2}\sum_{i=1}^n \sum_{j=1}^n  ({\alpha}'_i-\alpha_i) ({\alpha}'_j-\alpha_j) x_i^T x_j \\
+\end{align*}\tag{6.8}</script><p>由式(6.7)可知 $\alpha_i-{\alpha} ‘_i \leq C​$，则原问题被转化成对偶问题</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+
+ \max \quad & L(\alpha,{\alpha}'_i,\mu)=\sum_{i=1}^n\left[ \left({\alpha}'_i-\alpha_i\right)y_i -({\alpha}'_i+\alpha_i)\varepsilon\right]\\
+&\quad\quad\quad\quad\quad\ \ \ - \frac{1}{2}\sum_{i=1}^n \sum_{j=1}^n  ({\alpha}'_i-\alpha_i) ({\alpha}'_j-\alpha_j) x_i^T x_j  \\
+
+\mbox{s.t.} \quad
+    &\sum_{i=1}^n ({\alpha}'_i-\alpha_i) =0 \\
+    & \alpha_i,{\alpha}'_i \geq 0, \quad i=1,2,\cdots,n\\
+    &\alpha_i-{\alpha} '_i \leq C \quad i=1,2,\cdots,n
+\end{align*}\tag{6.9}</script><p>而不等式约束问题需要满足KKT条件即</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\alpha_i(f(x_i)-y_i-\varepsilon -\xi_i)=0\\
+\\
+{\alpha} '_i(f(x_i)-y_i-\varepsilon+\xi_i)=0\\
+\\
+\mu_i\xi_i=0\\
+\\
+ \alpha_i,{\alpha}'_i,\mu_i \geq 0
+\end{cases}\tag{6.10}</script><p>分析KKT条件可以看出当 $(f(x_i)-y_i-\varepsilon -\xi_i)=0$ 时，样本点落在下侧间隔带上，当 $f(x_i)-y_i-\varepsilon+\xi_i)=0$ 时样本点落在上侧间隔带上。由于样本点不可能同时落在下侧和上侧间隔带上，所以 $\alpha_i$ 和 ${\alpha} ‘_i$ 中必有一个为0。与求解SVM类似求解该对偶问题即可求解出 $\alpha$ 以及 ${\alpha} ‘_i$，然后再求出 $w$ 及 $b$。此外我们根据式(6.5)可以得到SVR的解的形式为</p>
+<script type="math/tex; mode=display">
+f(x)=\sum_{i=1}^n({\alpha} '_i-\alpha_i)x_i^Tx+b\tag{6.11}</script><p>可以看到SVR也可以表示成核函数的形式。 </p>
 <h3 id="拉格朗日对偶性"><a href="#拉格朗日对偶性" class="headerlink" title="拉格朗日对偶性"></a>拉格朗日对偶性</h3><h4 id="原始问题"><a href="#原始问题" class="headerlink" title="原始问题"></a>原始问题</h4><p>假设 $f(x)$，$g_i(x)$，$h_j(x)$ 是定义在 $\mathbf{R}^n$上的连续可微函数，考虑约束的最优化问题</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -781,7 +843,32 @@ L(x, \alpha, c) = f(x) + \sum_{i=1}^k \alpha_i (g_i(x) + c_i^2)\tag{7.18}</scrip
 \alpha_ig_i(x)=0\\
 \\
 \alpha_i \geqslant 0
-\end{cases}\tag{7.20}</script><p><strong>综上所述，当既有等式约束又有不等式约束时就有了我们之前所说的KTT条件</strong> </p>
+\end{cases}\tag{7.20}</script><p>当然我们还得讲讲为什么要求 $\alpha\geq0$。设 ${x} ‘$ 是 $x$ 领域上的点，即</p>
+<script type="math/tex; mode=display">
+{x} ' = x + \Delta x\tag{7.21}</script><p>则根据 $g_i(x)\leq0​$ 以及 $g_i(x + \Delta x)=g_i(x)+\bigtriangledown g_i(x)\Delta x ​$可得</p>
+<script type="math/tex; mode=display">
+\bigtriangledown g_i(x)\Delta x \leq 0\tag{7.22}</script><p>此外由于</p>
+<script type="math/tex; mode=display">
+f(x + \Delta x)=f(x)+\bigtriangledown f(x)\Delta x\tag{7.23}</script><p>根据上式可得为了在点 $x​$ 处取得极小值 $\bigtriangledown f(x)\Delta x \geq 0​$，而我们KKT条件中第一个式子可得</p>
+<script type="math/tex; mode=display">
+\bigtriangledown f(x)\Delta x = -\sum_{i=1}^n\alpha_i\bigtriangledown g_i(x)\Delta x\tag{7.24}</script><p>所以 $\alpha_i \geq 0​$。<br>综上所述，当既有等式约束又有不等式约束时就有了我们之前所说的KTT条件。</p>
+<h5 id="统计学习方法上的KKT"><a href="#统计学习方法上的KKT" class="headerlink" title="统计学习方法上的KKT"></a>统计学习方法上的KKT</h5><p>在统计学习方法中的KKT条件为</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\bigtriangledown L(x) = 0\\
+\\
+\bigtriangledown L(\alpha) = 0\\
+\\
+\bigtriangledown L(\beta) = 0\\
+\\
+\alpha_ic_i(x)=0\\
+\\
+c_i(x)\leq0\\
+\\
+\alpha_i \geqslant 0\\
+\\
+h_j(x)=0
+\end{cases}\tag{7.25}</script><p>别看这个约束很长实际上跟我们推导出来的东西是一样的，该条件中的前三个式子即我们这里求解的 $x​$ 时对 $x​$ 以及引入的拉格朗日乘子求导，第四个式子对应 $\alpha_ig_i(x)=0​$，第五个式子其实就是我们一开始的约束条件 $g_i(x)\leq0​$，剩下的在形式上也一样了。</p>
 
       
     </div>
@@ -963,7 +1050,7 @@ L(x, \alpha, c) = f(x) + \sum_{i=1}^k \alpha_i (g_i(x) + c_i^2)\tag{7.18}</scrip
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分"><span class="nav-number">2.</span> <span class="nav-text">线性可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大间隔"><span class="nav-number">2.1.</span> <span class="nav-text">最大间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题求解"><span class="nav-number">2.2.</span> <span class="nav-text">问题求解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#转化原始问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">转化原始问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SMO求解对偶问题"><span class="nav-number">2.2.2.</span> <span class="nav-text">SMO求解对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#二次规划求解"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">二次规划求解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算偏移项b"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">计算偏移项b</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#选择变量"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">选择变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性不可分"><span class="nav-number">3.</span> <span class="nav-text">线性不可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#核函数"><span class="nav-number">3.1.</span> <span class="nav-text">核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多项式核"><span class="nav-number">3.1.1.</span> <span class="nav-text">多项式核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高斯核"><span class="nav-number">3.1.2.</span> <span class="nav-text">高斯核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他核函数"><span class="nav-number">3.1.3.</span> <span class="nav-text">其他核函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软间隔"><span class="nav-number">4.</span> <span class="nav-text">软间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hinge损失"><span class="nav-number">5.</span> <span class="nav-text">Hinge损失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持向量机回归"><span class="nav-number">6.</span> <span class="nav-text">支持向量机回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日对偶性"><span class="nav-number">7.</span> <span class="nav-text">拉格朗日对偶性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题"><span class="nav-number">7.1.</span> <span class="nav-text">原始问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题"><span class="nav-number">7.2.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题与对偶问题"><span class="nav-number">7.3.</span> <span class="nav-text">原始问题与对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KKT条件"><span class="nav-number">7.4.</span> <span class="nav-text">KKT条件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#等式约束问题"><span class="nav-number">7.4.1.</span> <span class="nav-text">等式约束问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不等式约束问题"><span class="nav-number">7.4.2.</span> <span class="nav-text">不等式约束问题</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分"><span class="nav-number">2.</span> <span class="nav-text">线性可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大间隔"><span class="nav-number">2.1.</span> <span class="nav-text">最大间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题求解"><span class="nav-number">2.2.</span> <span class="nav-text">问题求解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#转化原始问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">转化原始问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SMO求解对偶问题"><span class="nav-number">2.2.2.</span> <span class="nav-text">SMO求解对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#二次规划求解"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">二次规划求解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算偏移项b"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">计算偏移项b</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#选择变量"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">选择变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性不可分"><span class="nav-number">3.</span> <span class="nav-text">线性不可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#核函数"><span class="nav-number">3.1.</span> <span class="nav-text">核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多项式核"><span class="nav-number">3.1.1.</span> <span class="nav-text">多项式核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高斯核"><span class="nav-number">3.1.2.</span> <span class="nav-text">高斯核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他核函数"><span class="nav-number">3.1.3.</span> <span class="nav-text">其他核函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软间隔"><span class="nav-number">4.</span> <span class="nav-text">软间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hinge损失"><span class="nav-number">5.</span> <span class="nav-text">Hinge损失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持向量回归"><span class="nav-number">6.</span> <span class="nav-text">支持向量回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日对偶性"><span class="nav-number">7.</span> <span class="nav-text">拉格朗日对偶性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题"><span class="nav-number">7.1.</span> <span class="nav-text">原始问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题"><span class="nav-number">7.2.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题与对偶问题"><span class="nav-number">7.3.</span> <span class="nav-text">原始问题与对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KKT条件"><span class="nav-number">7.4.</span> <span class="nav-text">KKT条件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#等式约束问题"><span class="nav-number">7.4.1.</span> <span class="nav-text">等式约束问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不等式约束问题"><span class="nav-number">7.4.2.</span> <span class="nav-text">不等式约束问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#统计学习方法上的KKT"><span class="nav-number">7.4.3.</span> <span class="nav-text">统计学习方法上的KKT</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
