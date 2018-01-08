@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/24/Windows本地项目同步到Github/index.html">
 <meta property="og:site_name" content="ScNico">
 <meta property="og:description" content="本文记录了如何在windows下将本地项目同步到Github">
-<meta property="og:updated_time" content="2017-11-23T17:53:35.811Z">
+<meta property="og:updated_time" content="2018-01-08T02:37:13.742Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows本地项目同步到Github">
 <meta name="twitter:description" content="本文记录了如何在windows下将本地项目同步到Github">
@@ -394,14 +394,11 @@
 <li>在cmder中输入<code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>生成秘钥</li>
 <li>在<strong>C:\Users\yourusername\.ssh</strong>在目录下找到<strong>id_rsa.pub</strong>文件，可以用记事本或者其他文本工具打开该文件并全选复制里面的公钥</li>
 <li>登录<a href="https://github.com" target="_blank" rel="external">Github</a>找到<strong>Settings</strong>，找到其中<strong>SSH and GPG keys</strong>功能，<strong>New SSH key</strong>，其中的<strong>Title</strong>可以随便命名，然后将复制的公钥粘贴到<strong>Key</strong>中，最后点击<strong>Add SSH key</strong></li>
-<li>在Github上<strong>Create a new repository</strong>，Repository name与项目名相同，点击<strong>Create repository</strong></li>
+<li>在Github上<strong>Create a new repository</strong>，Repository name与项目名相同，不选择创建README，点击<strong>Create repository</strong></li>
 <li>继续在cmder中输入以下命令关联远程仓库<br><code>git remote add origin https://github.com/username/repositoryname.git</code></li>
 </ol>
 <h3 id="将本地仓库内容推送到远程仓库"><a href="#将本地仓库内容推送到远程仓库" class="headerlink" title="将本地仓库内容推送到远程仓库"></a>将本地仓库内容推送到远程仓库</h3><p>在cmder中输入<code>git push -u origin master</code>，由于新建的远程仓库是空的，所以要加上-u这个参数。在以后的使用中你可以只需要做以下的操作即可将本地内容同步到Github中</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m "commit description"</div><div class="line">git push</div></pre></td></tr></table></figure>
-<p>此外若遇到Github仓库中包含有本地仓库没有的内容（例如创建仓库时顺带建立了README文件），则可以通过<code>git pull --rebase origin master</code>先将内容合并后再<strong>push</strong></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/zamamiro/article/details/70172900" target="_blank" rel="external">Git的使用—如何将本地项目上传到Github</a></p>
-
       
     </div>
 
@@ -584,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Github账户"><span class="nav-number">1.</span> <span class="nav-text">创建Github账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装cmder"><span class="nav-number">2.</span> <span class="nav-text">安装cmder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建本地版本库"><span class="nav-number">3.</span> <span class="nav-text">创建本地版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建秘钥并关联远程仓库"><span class="nav-number">4.</span> <span class="nav-text">创建秘钥并关联远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将本地仓库内容推送到远程仓库"><span class="nav-number">5.</span> <span class="nav-text">将本地仓库内容推送到远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Github账户"><span class="nav-number">1.</span> <span class="nav-text">创建Github账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装cmder"><span class="nav-number">2.</span> <span class="nav-text">安装cmder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建本地版本库"><span class="nav-number">3.</span> <span class="nav-text">创建本地版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建秘钥并关联远程仓库"><span class="nav-number">4.</span> <span class="nav-text">创建秘钥并关联远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将本地仓库内容推送到远程仓库"><span class="nav-number">5.</span> <span class="nav-text">将本地仓库内容推送到远程仓库</span></a></li></ol></div>
             
 
           </div>
