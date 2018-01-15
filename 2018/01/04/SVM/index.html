@@ -92,20 +92,20 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM">
 <meta property="og:url" content="http://yoursite.com/2018/01/04/SVM/index.html">
-<meta property="og:site_name" content="ScNico">
+<meta property="og:site_name" content="陈光伟">
 <meta property="og:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/1.png">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/2.png">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/3.png">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/4.png">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/5.png">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/6.png">
-<meta property="og:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/7.png">
-<meta property="og:updated_time" content="2018-01-08T02:45:04.889Z">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BgfHGCAaDH.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/21Alf66cmE.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/hg5ac8bF7f.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BFmbBbmK2J.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/3CjGJaBC3l.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/fDH5e763Hf.png?imageslim">
+<meta property="og:updated_time" content="2018-01-15T08:28:24.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM">
 <meta name="twitter:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开">
-<meta name="twitter:image" content="c:/Users/ScNico/Desktop/Interview/ML/Image/1.png">
+<meta name="twitter:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BgfHGCAaDH.png?imageslim">
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <title> SVM | ScNico </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> SVM | 陈光伟 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -185,12 +185,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ScNico</span>
+        <span class="site-title">陈光伟</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">Chen Guangwei</p>
       
   </div>
 
@@ -291,13 +291,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/SVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ScNico">
+      <meta itemprop="name" content="陈光伟">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ScNico">
+      <meta itemprop="name" content="陈光伟">
     </span>
 
     
@@ -386,12 +386,12 @@
 <h3 id="线性可分"><a href="#线性可分" class="headerlink" title="线性可分"></a>线性可分</h3><p>给定线性可分的训练数据集 $(x,y)$，通过间隔最大化得到分离的超平面为 $w^T x+b=0$，称之为 $(w, b)$，相应的分类决策函数为称之为线性可分支持向量机，如式(2.1)所示。</p>
 <script type="math/tex; mode=display">
 f(x) = \mbox{sign}(w^Tx+b)\tag{2.1}</script><p>对于二分类问题一般假设 $y$ 的标签为 $\pm 1$，在实际问题中我们一般是取 $0$ 或者 $1$，当然也可以取其他的值，但究其根本来说对于超平面要做的事情只是将样本分开，而两类对应的函数值在超平面的符号正好相反，所以取 $\pm1$ 优点是可以直观感受，并且推导的时候更加简便。从下面两张图中可以看出来二者的差别仅仅是要求的分类超平面平移，而具体的推导过程其实并无太大差别，所以在这里我们也让 $y$ 的取值为 $\pm1$。</p>
-<p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\1.png" style="zoom:55%"></p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BgfHGCAaDH.png?imageslim" style="zoom:55%"></p>
 <p>定义 $yf(x)$ 为函数间隔，当样本正确分类的时候 $yf(x) \geqslant 0$，但是我们不能最大化这个函数间隔，因为当超平面 $(w,b)$ 确定时，等比例放大 $w$ 和 $b$ 得到的函数间隔会以相同的比例增大，而超平面 $(kw,kb)$ 却还是之前的超平面。所以便引出了几何间隔</p>
 <script type="math/tex; mode=display">
  \frac{yf(x)}{\left \| w \right \|}\tag{2.2}</script><p>其中 ${\left | w \right |}$ 表示 $L_2$ 范数。实际上这个几何间隔就是分类正确的点到直线距离公式。某条样本来说，该样本离超平面的间隔越大则分类的置信度越高，为了使分类的置信度尽量高，我们可以最大化几何间隔。然而对于样本空间中任意点 $x_i$ 到超平面都有一个几何间隔，那么我们到底最大化哪些点的几何间隔呢？</p>
 <p>从下图中看到离超平面越远的点我们越不需要关注，因为它们的几何间隔肯定比正好在间隔边界上的点（背景色不透明的点）大。所以我们只需要最大化这些点的几何间隔就可以了，而这些在间隔边界上的点便被称为<strong>支持向量</strong>。</p>
-<p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\2.png" style="zoom:65%"></p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim" style="zoom:65%"></p>
 <p>对于任意支持向量 $x_s$ 都有</p>
 <script type="math/tex; mode=display">
 y_sf(x_s)=1\tag{2.3}</script><h4 id="最大间隔"><a href="#最大间隔" class="headerlink" title="最大间隔"></a>最大间隔</h4><p>支持向量在边界上，所以支持向量正好满足 $w^Tx+b=\pm1$，所以我们可以直接最大化上图中的 $\gamma$ 得到如下的约束问题</p>
@@ -511,7 +511,7 @@ y_2[(K_{11}&+K_{22}-2K_{12})\alpha_2^{old}y_2+{f}'(x_1)-{f}'(x_2)+y_2-y_1]\\
 <p>若 $y_1 \neq y_2$</p>
 <script type="math/tex; mode=display">
 \alpha_1^{new}-\alpha_2^{new}=\alpha_1^{old}-\alpha_2^{old}=k \tag{2.28}</script><p>其中 $k​$ 是一个常量，为 $\zeta ​$ 或者 $-\zeta ​$，其在坐标系中的截距如下图所示</p>
-<p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\3.png" style="zoom:60%"></p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/21Alf66cmE.png?imageslim" style="zoom:60%"></p>
 <p>则我们可以得到在这种情况下</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -520,7 +520,7 @@ y_2[(K_{11}&+K_{22}-2K_{12})\alpha_2^{old}y_2+{f}'(x_1)-{f}'(x_2)+y_2-y_1]\\
 \end{align*}\tag{2.29}</script><p>同理若 $y_1 = y_2​$</p>
 <script type="math/tex; mode=display">
 \alpha_1^{new}+\alpha_2^{new}=\alpha_1^{old}+\alpha_2^{old}=k\tag{2.30}</script><p>其在坐标系中的截距如下图所示</p>
-<p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\4.png" style="zoom:60%"></p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/hg5ac8bF7f.png?imageslim" style="zoom:60%"></p>
 <p>在这种情况下</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -584,7 +584,7 @@ y_i f(x_i) - 1 \geqslant 0\
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过求解对偶问题我们得到了最优解 $\alpha$，通过 $\alpha$ 我们就可以得到原始问题的解 $w$ 以及 $b$ 得到我们想要的分类函数了。其形式如下所示</p>
 <script type="math/tex; mode=display">
 f(x)=\mbox{sign}(\sum_{i=1}^n\alpha_iy_ix_ix^T+b)\tag{2.39}</script><h3 id="线性不可分"><a href="#线性不可分" class="headerlink" title="线性不可分"></a>线性不可分</h3><p>我们之假定了训练样本是线性可分的，即存在某超平面可以将训练样本正确分类，而在实际的问题中，原始样本空间或许并不能由某个超平面正确分类。对于这样的问题可以通过将原始的样本空间映射到更高维的特征空间，使得样本在特征空间中线性可分。比如下图中的数据原本是线性不可分的，而我们从第三个维度却是线性可分的，而核函数就是在解决这个问题的。</p>
-<p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\5.png" style="zoom:50%"></p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BFmbBbmK2J.png?imageslim" style="zoom:50%"></p>
 <h4 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h4><p>原始的用非线性可分的数据去训练一个线性分类器，通常的做法就是将原始样本空间映射到特征空间，然后在特征空间中训练线性分类器。而核函数的方法则是直接将特征空间的映射以及内积融合在一起，并且解决了映射函数维度爆炸的问题（多项式核中将会举一个简单的例子）。</p>
 <p>首先定义 $\phi(x_i)$ 表示样本 $x_i$ 映射到特征空间的特征向量，定义核函数如下所示</p>
 <script type="math/tex; mode=display">
@@ -688,7 +688,7 @@ y_i f(x_i) - 1 \geqslant 0\
 \end{align*}\tag{5.1}</script><p>对于该目标函数我们还可以理解为带 $L_2$ 正则的Hinge损失。我们先看一下Hinge函数的定义</p>
 <script type="math/tex; mode=display">
 Hinge(x)=max(0, 1-x)\tag{5.2}</script><p>其函数图像在坐标轴上如下图所示，因其形状像开门时 $135^{\circ}$ 的合页得名Hinge。</p>
-<p><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\6.png" style="zoom:40%"></p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/3CjGJaBC3l.png?imageslim" style="zoom:40%"></p>
 <p>我们先定义包含损失函数的目标函数</p>
 <script type="math/tex; mode=display">
 \min_{w,b}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^nL(f(x_i),y_i)\tag{5.3}</script><p>一般的我们将上式第一项称为结构风险，用于描述得到的模型 $f(x)$ 的性质，而将第二项称为经验风险，用来描述模型与训练数据的契合度。而其中的系数 $C$ 是我们用来权衡结构风险和经验风险的系数。而在本题中经验风险我们用Hinge损失函数来表示</p>
@@ -698,7 +698,7 @@ L_{hinge}=max(0,1-y_if(x_i))\tag{5.4}</script><p>所以目标函数变为</p>
 \min_{w,b}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^nmax(0,1-y_if(x_i))\tag{5.5}</script><p>由 $\xi_i\geq0$ 可以将上式重新写为</p>
 <script type="math/tex; mode=display">
 \min_{w,b,\xi_i}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^n\xi_i \tag{5.6}</script><p>而这和我们引入软件隔的目标函数正好一样。</p>
-<h3 id="支持向量回归"><a href="#支持向量回归" class="headerlink" title="支持向量回归"></a>支持向量回归</h3><p>支持向量机通过最大间隔来得到分类模型，其将样本限定在决策边界的两边，$y_if(x_i)&gt;0$ 才认为其正确分类，而支持向量回归（Support Vector Regression，SVR）恰好相反，SVR将样本点限制在决策边界之内，SVR认为只有在决策边界内的样本才是正确分类的样本，下图中的 $\varepsilon $ 为能够容忍的错误。<br><img src="C:\Users\ScNico\Desktop\Interview\ML\Image\7.png" style="zoom:60%"></p>
+<h3 id="支持向量回归"><a href="#支持向量回归" class="headerlink" title="支持向量回归"></a>支持向量回归</h3><p>支持向量机通过最大间隔来得到分类模型，其将样本限定在决策边界的两边，$y_if(x_i)&gt;0$ 才认为其正确分类，而支持向量回归（Support Vector Regression，SVR）恰好相反，SVR将样本点限制在决策边界之内，SVR认为只有在决策边界内的样本才是正确分类的样本，下图中的 $\varepsilon $ 为能够容忍的错误。<br><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/fDH5e763Hf.png?imageslim" style="zoom:60%"></p>
 <p>所以SVR的目标函数为</p>
 <script type="math/tex; mode=display">
 \min_{w,b}\quad\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^nL(f(x_i),y_i)\tag{6.1}</script><p>其中</p>
@@ -996,10 +996,10 @@ h_j(x)=0
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ScNico" />
-          <p class="site-author-name" itemprop="name">ScNico</p>
+               alt="陈光伟" />
+          <p class="site-author-name" itemprop="name">陈光伟</p>
            
-              <p class="site-description motion-element" itemprop="description">Talk is cheap</p>
+              <p class="site-description motion-element" itemprop="description">陈光伟的Blog</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -1093,7 +1093,7 @@ h_j(x)=0
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ScNico</span>
+  <span class="author" itemprop="copyrightHolder">陈光伟</span>
   
 </div>
 
