@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/24/Windows本地项目同步到Github/index.html">
 <meta property="og:site_name" content="陈光伟">
 <meta property="og:description" content="本文记录了如何在windows下将本地项目同步到Github">
-<meta property="og:updated_time" content="2018-01-08T02:37:13.742Z">
+<meta property="og:updated_time" content="2018-01-17T15:20:24.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Windows本地项目同步到Github">
 <meta name="twitter:description" content="本文记录了如何在windows下将本地项目同步到Github">
@@ -375,15 +375,7 @@
 
       
         <p>本文记录了如何在windows下将本地项目同步到Github<a id="more"></a></p>
-<h3 id="创建Github账户"><a href="#创建Github账户" class="headerlink" title="创建Github账户"></a>创建<a href="https://github.com/join?source=header-home" target="_blank" rel="external">Github</a>账户</h3><h3 id="安装cmder"><a href="#安装cmder" class="headerlink" title="安装cmder"></a>安装<a href="http://cmder.net/" target="_blank" rel="external">cmder</a></h3><p>强推cmder，它不仅可以使用windows的所有命令，更能使用linux和shell的相关命令，并且Full版本内建Git for Windows，最重要的是颜值巨高</p>
-<ol>
-<li>下载Full版本文件解压</li>
-<li>将其根目录添加到环境变量Path中</li>
-<li>通过在在cmd中输入<code>cmder.exe /REGISTER ALL</code>以下命令来将其添加到右键菜单</li>
-<li>（可选操作）由于在cmder中命令提示符是λ而不是我们通常看到的$，所以我们想将其替换成$可以通过将<code>${CMDER_HOME}\vendor\clink.lua</code>中的λ修改成$即可<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if env == nil then</div><div class="line">    lambda = &quot;λ&quot;</div><div class="line">else</div><div class="line">    lambda = &quot;(&quot;..env..&quot;) λ&quot;</div><div class="line">end</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="创建本地版本库"><a href="#创建本地版本库" class="headerlink" title="创建本地版本库"></a>创建本地版本库</h3><ol>
+<h3 id="创建Github账户"><a href="#创建Github账户" class="headerlink" title="创建Github账户"></a>创建<a href="https://github.com/join?source=header-home" target="_blank" rel="external">Github</a>账户</h3><h3 id="安装cmder"><a href="#安装cmder" class="headerlink" title="安装cmder"></a>安装<a href="https://scnico.github.io/2017/12/24/Git%E7%AC%94%E8%AE%B0/#cmder" target="_blank" rel="external">cmder</a></h3><h3 id="创建本地版本库"><a href="#创建本地版本库" class="headerlink" title="创建本地版本库"></a>创建本地版本库</h3><ol>
 <li>进入项目根目录</li>
 <li>右键<strong>cmder here</strong></li>
 <li>在cmder中输入<code>git init</code>来初始化本地仓库</li>
@@ -391,6 +383,7 @@
 <li>在cmder中输入<code>git commit -m &quot;init commit&quot;</code>将项目提交到仓库</li>
 </ol>
 <h3 id="创建秘钥并关联远程仓库"><a href="#创建秘钥并关联远程仓库" class="headerlink" title="创建秘钥并关联远程仓库"></a>创建秘钥并关联远程仓库</h3><ol>
+<li>在cmder中输入 <code>git config --global user.name &quot;username&quot;</code> 和 <code>git config --global user.email your@email.com</code> 配置</li>
 <li>在cmder中输入<code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>生成秘钥</li>
 <li>在<strong>C:\Users\yourusername\.ssh</strong>在目录下找到<strong>id_rsa.pub</strong>文件，可以用记事本或者其他文本工具打开该文件并全选复制里面的公钥</li>
 <li>登录<a href="https://github.com" target="_blank" rel="external">Github</a>找到<strong>Settings</strong>，找到其中<strong>SSH and GPG keys</strong>功能，<strong>New SSH key</strong>，其中的<strong>Title</strong>可以随便命名，然后将复制的公钥粘贴到<strong>Key</strong>中，最后点击<strong>Add SSH key</strong></li>
