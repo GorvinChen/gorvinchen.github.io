@@ -377,7 +377,7 @@
         <h3 id="信息熵的起源"><a href="#信息熵的起源" class="headerlink" title="信息熵的起源"></a>信息熵的起源</h3><p>信息熵的作用是来量化信息，若一件不可能发生的事情发生了，相对于可能或者大概率发生的事情发生了来说，我们收到的信息前者更多，必然事件对我们来说几乎没有信息。所以我们可以通过信息$x$的概率分布$p(x)$来表达信息量$h(x)$。<a id="more"></a>通过以上的例子我们知道$h(\cdot)$具有如下的<strong>特点</strong>：</p>
 <p>对于不相关的$x$和$y$，$h(x,y)=h(x)+h(y)$，而我们知道对于概率分布来说，若$x$和$y$相互独立，那么$p(x,y)=p(x) \cdot p(y)$，所以我们就想到了通过$-log_2p(x)$来表示$h(x)$，其中的负号是为了使信息量非负。这样概率低的事件就有了更高的信息量，为了方便$log$的底数取2，此时的$h(x)$单位为$bits$。我们将随机变量$x$的信息量称为熵</p>
 <script type="math/tex; mode=display">
-\text{H}(x) = -\sum_x{p(x) \cdot \log_2p(x)}</script><p>假设随机变量$X$有8种取值，每种的概率相等，则传输$X$需要$H(X) = -8 \cdot \frac{1}{8} \cdot \log_2{\frac{1}{8}} = 3\ bits$。现在假设8种取值${a,b,c,d,e,f,g,h}$的概率为：${\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64}}$，对这8中取值进行哈夫曼编码得到其对应的编码为：${0,10,110,1110,111100,111101,111110,111111}$，其平均编码长度为2$bits$。我们可以看出熵是编码随机变量状态的最小比特量，且非均匀分布的熵值要小于均匀分布。</p>
+\text{H}(x) = -\sum_x{p(x) \cdot \log_2p(x)}</script><p>假设随机变量$X$有8种取值，每种的概率相等，则传输$X$需要$H(X) = -8 \cdot \frac{1}{8} \cdot \log_2{\frac{1}{8}} = 3\ bits$。现在假设8种取值$\{a,b,c,d,e,f,g,h\}$的概率为：$\{\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64}\}$，对这8中取值进行哈夫曼编码得到其对应的编码为：$\{0,10,110,1110,111100,111101,111110,111111\}$，其平均编码长度为2$bits$。我们可以看出熵是编码随机变量状态的最小比特量，且非均匀分布的熵值要小于均匀分布。</p>
 <h3 id="熵在统计力学的起源"><a href="#熵在统计力学的起源" class="headerlink" title="熵在统计力学的起源"></a>熵在统计力学的起源</h3><p>考虑将$N$个相同的物品分配到一些盒子中，$n_i$表示在第$i$个盒子中分配到了$n_i$个物品，则一共有$N!$种分配的方式，若我们不考虑每个盒子中的分配顺序，则分配的方式一共有</p>
 <script type="math/tex; mode=display">
 W = \frac{N!}{\prod_i n_i! }</script><p>而熵则是对其取对数后归一化的结果，$\text{H}=\frac{1}{N}\cdot \ln W = \frac{1}{N} \cdot \ln N! - \frac{1}{N} \cdot \sum_i{\ln{n_i!}}$，而由于$\ln N! \simeq  N \cdot \ln N - N,\ if\ N \rightarrow \infty $，则</p>
@@ -491,7 +491,7 @@ f(\int \mathbf{x} p(\mathbf{x}) d\mathbf{x}) \leqslant \int f(\mathbf{x}) p(\mat
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/24/Windows本地项目同步到Github/" rel="prev" title="Windows本地项目同步到Github">
+              <a href="/2017/11/24/windows本地项目上传github/" rel="prev" title="Windows本地项目同步到Github">
                 Windows本地项目同步到Github <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -565,7 +565,7 @@ f(\int \mathbf{x} p(\mathbf{x}) d\mathbf{x}) \leqslant \int f(\mathbf{x}) p(\mat
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -576,7 +576,7 @@ f(\int \mathbf{x} p(\mathbf{x}) d\mathbf{x}) \leqslant \int f(\mathbf{x}) p(\mat
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -587,7 +587,7 @@ f(\int \mathbf{x} p(\mathbf{x}) d\mathbf{x}) \leqslant \int f(\mathbf{x}) p(\mat
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
