@@ -398,7 +398,7 @@ f=sgn(x)=\begin{cases}
 <p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180309/jjhdaa1HCG.jpg?imageslim" style="zoom:90%"></p>
 <h3 id="BP神经网络模型"><a href="#BP神经网络模型" class="headerlink" title="BP神经网络模型"></a>BP神经网络模型</h3><h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><p>首先在BP神经网络模型中我们讨论前向传播，对于一个$L$层的BP神经网络，其输入层为第$1$层，输出层为第$1$层，隐藏层为第$2$层到第$L-1$层。对于输出层的第$k$个神经元，其输出为$O_k^L$，下标$k$表示第$k$个，上标$L$表示层数，输入为$I_k^L$。第$l$层包含的神经元个数用$|l|$表示。</p>
 <p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180309/0ecd7D4bkm.jpg?imageslim" style="zoom:90%"></p>
-<p>在下面的表述中为了描述的更加清楚我将不使用阈值 $\theta$，即第 $l$ 层的第 $j$ 个神经元的输入 $I<em>j^l$ 与第 $l-1$ 个神经元的输出关系如下所示，其中 $w</em>{ji}^{l-1}$ 表示第 $l$ 层第$j$个神经元与第$l-1$层第$j$个神经元的链接权重。</p>
+<p>在下面的表述中为了描述的更加清楚我将不使用阈值 $\theta$，即第 $l$ 层的第 $j$ 个神经元的输入 $I_j^l$ 与第 $l-1$ 个神经元的输出关系如下所示，其中 $w_{ji}^{l-1}$ 表示第 $l$ 层第$j$个神经元与第$l-1$层第$j$个神经元的链接权重。</p>
 <script type="math/tex; mode=display">
 I_j^l=\sum_{i=1}^{|l-1|}w_{ji}^{l-1}·O_i^{l-1}</script><p>而输出$O_j^l= f(I_j^l)$，$f$为激励函数。</p>
 <h5 id="激活函数的选择"><a href="#激活函数的选择" class="headerlink" title="激活函数的选择"></a>激活函数的选择</h5><p>一般来说在神经网络中我们选择的激励函数$f​$是指函数$sigmoid​$，即$f=\frac{1}{1+e^{-x}}​$，在本篇文章中也会使用$sigmoid​$函数，那为什么我们需要选择函数呢：因为如果我们不选用激活函数或者选用线性的激活函数，你会发现，我去不管多少层网络，我们最后得到的都是一个线性函数，而使用非线性的$sigmoid​$以后，我们的网络就可以拟合非线性的函数了。当然$sigmoid​$函数在求导的时候也有一个非常有趣的现象，待会这个求导在下面会用到，具体可以自己推导下，$f’=f·(1-f)​$，即$\frac{\partial O_j^l}{\partial I_j^l}=O_j^l·(1-O_j^l)​$。当然还有其他很多激励函数，例如$tanh(x)= 2sigmoid(2x)-1​$，$ReLu = max(0,x)​$具体的大家可以看这篇<a href="http://blog.csdn.net/cyh_24/article/details/50593400" target="_blank" rel="external">博客</a></p>
@@ -406,21 +406,21 @@ I_j^l=\sum_{i=1}^{|l-1|}w_{ji}^{l-1}·O_i^{l-1}</script><p>而输出$O_j^l= f(I_
 <p>梯度下降法则就不过多的叙述了，简单的说就是你更新权重不能更新呀，而按照梯度的方向更新权重能够更快的收敛。梯度下降的公式如下所示：</p>
 <script type="math/tex; mode=display">
 E=\frac{1}{2}\sum_{k=1}^{|L|}(T_k-O_k^L)^2</script><script type="math/tex; mode=display">
-w^l_{ji}=w^l_{ji}+\Delta w^l_{ji} \ \ \ \ \ \ \Delta w^l_{ji}=-\eta·\frac{\partial E}{\partial w^l_{ji}}</script><p>那么为什么梯度下降要用负梯度方向呢：大前提，学习速率$\eta &gt;0$，对于误差$E$来说，要是它对$w<em>{ji}^l$的偏导$\frac{\partial E}{\partial w</em>{ji}^l}$，那就说明误差随着权重的增大而增大，那我们就需要去通过减小权重来减小误差，所以$\Delta w<em>{ji}^{l} $就应该小于0，耶，你会发现这时候的$\Delta w</em>{ji}^{l} $公式中的负号就起作用了， 它正好使得$\Delta w_{ji}^{l} &lt;0$。当然我们如果要求某某某的最大值，也可以使用正梯度。</p>
-<p>直观上来看在神经网络中的每个神经元的权重更新都是通过误差对其的偏导来更新的，在这里我们需要引入新变量梯度$\delta $，对于第$l$层第$j$个神经元的梯度$\delta <em>{j}^{l} $，我们定义其值为$\delta </em>{j}^{l} =-\frac{\partial E}{\partial I_{j}^{l} } $，好了那接下来我们来看看权重到底是怎么更新的。</p>
+w^l_{ji}=w^l_{ji}+\Delta w^l_{ji} \ \ \ \ \ \ \Delta w^l_{ji}=-\eta·\frac{\partial E}{\partial w^l_{ji}}</script><p>那么为什么梯度下降要用负梯度方向呢：大前提，学习速率$\eta &gt;0$，对于误差$E$来说，要是它对$w_{ji}^l$的偏导$\frac{\partial E}{\partial w_{ji}^l}$，那就说明误差随着权重的增大而增大，那我们就需要去通过减小权重来减小误差，所以$\Delta w_{ji}^{l} $就应该小于0，耶，你会发现这时候的$\Delta w_{ji}^{l} $公式中的负号就起作用了， 它正好使得$\Delta w_{ji}^{l} &lt;0$。当然我们如果要求某某某的最大值，也可以使用正梯度。</p>
+<p>直观上来看在神经网络中的每个神经元的权重更新都是通过误差对其的偏导来更新的，在这里我们需要引入新变量梯度$\delta $，对于第$l$层第$j$个神经元的梯度$\delta _{j}^{l} $，我们定义其值为$\delta _{j}^{l} =-\frac{\partial E}{\partial I_{j}^{l} } $，好了那接下来我们来看看权重到底是怎么更新的。</p>
 <h5 id="输出层权重更新"><a href="#输出层权重更新" class="headerlink" title="输出层权重更新"></a>输出层权重更新</h5><p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180309/GaaE84hHlc.jpg?imageslim" style="zoom:90%"></p>
-<p>首先我们来看输出层，即第$L$层，由于权重$w<em>{kj}^{L-1} $只对输出层的第$k个单$元产生影响，即只影响$O</em>{k}^{L} $，所以我们直接求导就可以了。在求导过程中采用链式求导法则，具体如下</p>
-<p>根据$I<em>{j}^{l} $的公式我们可以得到$I</em>{k}^{L}$以及$\frac{\partial I<em>{k}^{L}}{\partial w</em>{kj}^{L-1}} $</p>
+<p>首先我们来看输出层，即第$L$层，由于权重$w_{kj}^{L-1} $只对输出层的第$k个单$元产生影响，即只影响$O_{k}^{L} $，所以我们直接求导就可以了。在求导过程中采用链式求导法则，具体如下</p>
+<p>根据$I_{j}^{l} $的公式我们可以得到$I_{k}^{L}$以及$\frac{\partial I_{k}^{L}}{\partial w_{kj}^{L-1}} $</p>
 <script type="math/tex; mode=display">
--\frac{\partial E}{\partial w_{kj}^{L-1}}=\frac{\partial E}{\partial I_k^L}·\frac{\partial I_k^L }{\partial w_{kj}^{L-1}}=\delta_k^L·O_j^{L-1}</script><p>根据$sigmoid$函数求导公式我们可以得到$\frac{\partial O<em>{k}^{L}}{\partial I</em>{k}^{L}} $，而误差$E$如下所示，所以我们可以得到$\frac{\partial E}{\partial O<em>{k}^{L}} $，最后便得到了第$L层的每个$神经单元的梯度项$\delta </em>{k}^{L} $</p>
+-\frac{\partial E}{\partial w_{kj}^{L-1}}=\frac{\partial E}{\partial I_k^L}·\frac{\partial I_k^L }{\partial w_{kj}^{L-1}}=\delta_k^L·O_j^{L-1}</script><p>根据$sigmoid$函数求导公式我们可以得到$\frac{\partial O_{k}^{L}}{\partial I_{k}^{L}} $，而误差$E$如下所示，所以我们可以得到$\frac{\partial E}{\partial O_{k}^{L}} $，最后便得到了第$L层的每个$神经单元的梯度项$\delta _{k}^{L} $</p>
 <script type="math/tex; mode=display">
 E= \frac{1}{2}\sum_{k=1}^{|L|}(T_k-O_k^L)^2</script><script type="math/tex; mode=display">
 \delta_k^L=-\frac{\partial E }{\partial I_k^L}=-\frac{\partial E}{\partial O_k^L}·\frac{\partial O_k^L}{\partial I_k^L}=(T_k-O_k^L)·O_k^L(1-O_k^L)</script><p>所以便得到了输出层上一层与输出层的链接权重$w_{kj}^{L-1} $更新公式</p>
 <script type="math/tex; mode=display">
 \Delta w_{kj}^{L-1}=\eta ·\delta_k^L·O_k^{L-1}</script><h5 id="隐藏层权重更新"><a href="#隐藏层权重更新" class="headerlink" title="隐藏层权重更新"></a>隐藏层权重更新</h5><p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180309/GaaE84hHlc.jpg?imageslim" style="zoom:90%"></p>
-<p>接下来是隐藏层，这里对$\Delta w<em>{kj}^{L-2} $进行推导，其他隐藏层以及输入层类似，显然$w</em>{kj}^{L-2} $虽然只影响第$L-1$层的第$j个$单元，但$L-1$层的第$j$个单元却链接了输出层的所有单元，所以$w_{kj}^{L-2}$对输出层的每一个单元都产生了影响。我们需要在求导的时它对输出层单元的每个误差的影响进行叠加，与输出层类似部分就不再累述。</p>
+<p>接下来是隐藏层，这里对$\Delta w_{kj}^{L-2} $进行推导，其他隐藏层以及输入层类似，显然$w_{kj}^{L-2} $虽然只影响第$L-1$层的第$j个$单元，但$L-1$层的第$j$个单元却链接了输出层的所有单元，所以$w_{kj}^{L-2}$对输出层的每一个单元都产生了影响。我们需要在求导的时它对输出层单元的每个误差的影响进行叠加，与输出层类似部分就不再累述。</p>
 <script type="math/tex; mode=display">
--\frac{\partial E}{\partial w_{ji}^{L-2}}=\frac{\partial E}{\partial I_j^L-1}·\frac{\partial I_j^L-1 }{\partial w_{jt}^{L-2}}=\delta_j^{L-1}·O_i^{L-2}</script><p>对于第$L-1$层的第$j$个神经单元的梯度项$\delta <em>{j}^{L-1} $来说，由于这个神经单元链接了输出层的每个单元，所以我们需要对输出层$\left| L \right| $个单元求和，于是便得到了梯度项$\delta </em>{j}^{L-1} $的计算公式</p>
+-\frac{\partial E}{\partial w_{ji}^{L-2}}=\frac{\partial E}{\partial I_j^L-1}·\frac{\partial I_j^L-1 }{\partial w_{jt}^{L-2}}=\delta_j^{L-1}·O_i^{L-2}</script><p>对于第$L-1$层的第$j$个神经单元的梯度项$\delta _{j}^{L-1} $来说，由于这个神经单元链接了输出层的每个单元，所以我们需要对输出层$\left| L \right| $个单元求和，于是便得到了梯度项$\delta _{j}^{L-1} $的计算公式</p>
 <script type="math/tex; mode=display">
 \delta_j^{L-1}=-\frac{\partial E }{\partial I_j^{L-1}}=\sum_{k=1}^{|L|}-\frac{\partial E}{\partial I_k^L}·\frac{\partial I_k^L}{\partial O_j^{L-1}}·\frac{\partial O_j^{L-1}}{\partial I_j^{L-1}}=\sum_{k=1}^{|L|}\delta_k^L·w_{kj}^{L-1}·O_j^{L-1}(1-O_j^{L-1})</script><p>所以便得到了$L-2$层与$L-1层$的链接权重$w_{kj}^{L-1} 更新$公式</p>
 <script type="math/tex; mode=display">
@@ -437,9 +437,9 @@ E= \frac{1}{2}\sum_{k=1}^{|L|}(T_k-O_k^L)^2</script><script type="math/tex; mode
 </li>
 <li><p>初始化网络权重<br>随机初始化一个很小的值，不能全置为0，全置为0后每次更新权重都会是一样的结果。</p>
 </li>
-<li><p>将$m$个训练样本循环输入模型中进行训练<br>a) 前向传播计算每个神经单元的输出<br>b) 计算输出层梯度项 $\delta <em>{k}^{L}= O</em>{k}^{L}\cdot (1-O<em>{k}^{L})\cdot (T</em>{k}-O<em>{k}^{L} )$<br>c) 计算隐藏层梯度项 $\delta </em>{i}^{l}= O<em>{i}^{l}\cdot (1-O</em>{i}^{l})\cdot \sum<em>{j=1}^{|l+1|}w</em>{ji}^l \cdot \delta_j^{l+1}$</p>
+<li><p>将$m$个训练样本循环输入模型中进行训练<br>a) 前向传播计算每个神经单元的输出<br>b) 计算输出层梯度项 $\delta _{k}^{L}= O_{k}^{L}\cdot (1-O_{k}^{L})\cdot (T_{k}-O_{k}^{L} )$<br>c) 计算隐藏层梯度项 $\delta _{i}^{l}= O_{i}^{l}\cdot (1-O_{i}^{l})\cdot \sum_{j=1}^{|l+1|}w_{ji}^l \cdot \delta_j^{l+1}$</p>
 </li>
-<li><p>更新每个神经单元的权重$w<em>{ji}^{l} =w</em>{ji}^{l} +\Delta w<em>{ji}^{l} $，$\Delta w</em>{ji}^{l} =\eta \cdot \delta <em>{j}^{l+1}\cdot O</em>{i}^{l}$</p>
+<li><p>更新每个神经单元的权重$w_{ji}^{l} =w_{ji}^{l} +\Delta w_{ji}^{l} $，$\Delta w_{ji}^{l} =\eta \cdot \delta _{j}^{l+1}\cdot O_{i}^{l}$</p>
 </li>
 </ol>
 <h4 id="算法缺陷"><a href="#算法缺陷" class="headerlink" title="算法缺陷"></a>算法缺陷</h4><ol>
@@ -447,7 +447,7 @@ E= \frac{1}{2}\sum_{k=1}^{|L|}(T_k-O_k^L)^2</script><script type="math/tex; mode
 </li>
 <li><p>训练速度慢，容易陷入局部最优<br>对于这个问题可以增加冲量项来解决，公式如下，其中$\alpha$为冲量，$0\leq \alpha  &lt; 1，$$n$表示第$n$次更新</p>
 <script type="math/tex; mode=display">
-\Delta w_{ji}^{l}=\eta ·\delta_j^{l+1}·O_i^{l}+\alpha\Delta w_{ji}^l(n-1)</script><p>那么为什么这样做有效呢：若本次更新权重与上次更新方向相反，假设$\Delta w<em>{ji}^{l}(n)&gt;0$，而$\Delta w</em>{ji}^{l}(n-1)&lt;0$，即梯度的方向变了，说明错过了最小值，那么增加冲量就会让本次更新的步长减小点；若相同时可以增大步长，可以加快收敛。同样也可能使迭代过程中直接越过局部最优解。</p>
+\Delta w_{ji}^{l}=\eta ·\delta_j^{l+1}·O_i^{l}+\alpha\Delta w_{ji}^l(n-1)</script><p>那么为什么这样做有效呢：若本次更新权重与上次更新方向相反，假设$\Delta w_{ji}^{l}(n)&gt;0$，而$\Delta w_{ji}^{l}(n-1)&lt;0$，即梯度的方向变了，说明错过了最小值，那么增加冲量就会让本次更新的步长减小点；若相同时可以增大步长，可以加快收敛。同样也可能使迭代过程中直接越过局部最优解。</p>
 </li>
 <li><p>对初始权重敏感</p>
 <p>初始权重的不同会导致我们每次得到的结果有可能不同，在matlab中你可能发现我们每次训练的神经网络结果都不一样</p>
