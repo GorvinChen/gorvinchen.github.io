@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BFmbBbmK2J.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/3CjGJaBC3l.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/fDH5e763Hf.png?imageslim">
-<meta property="og:updated_time" content="2018-01-15T08:35:58.335Z">
+<meta property="og:updated_time" content="2018-03-13T02:12:55.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM">
 <meta name="twitter:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开">
@@ -398,12 +398,12 @@ y_sf(x_s)=1\tag{2.3}</script><h4 id="最大间隔"><a href="#最大间隔" class
 <script type="math/tex; mode=display">
 \begin{align*}
 \max_{w,b}\quad&\frac{2}{ \left \| w \right \|} \\
-\mbox{s.t.}\quad& y_i(x^Tx_i + b) \geqslant 1, \quad i=1,2,\cdots,n
+\mbox{s.t.}\quad& y_i(w^Tx_i + b) \geqslant 1, \quad i=1,2,\cdots,n
 \end{align*}\tag{2.4}</script><p>而这个问题可以等价转化成如下的形式</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 \min_{w,b}\quad&\frac{1}{2} \left \| w \right \|^2 \\
-\mbox{s.t.}\quad& y_i(x^Tx_i + b) \geqslant 1, \quad i=1,2,\cdots,n
+\mbox{s.t.}\quad& y_i(w^Tx_i + b) \geqslant 1, \quad i=1,2,\cdots,n
 \end{align*}\tag{2.5}</script><h4 id="问题求解"><a href="#问题求解" class="headerlink" title="问题求解"></a>问题求解</h4><p>根据<a href="https://scnico.github.io/2018/01/04/SVM/#%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98" target="_blank" rel="external">KKT</a>条件中不等式约束问题的求解，该问题可以转化成如下形式</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -601,7 +601,7 @@ f(x)=(\sum_{i=1}^n\alpha_iy_ix_i)^Tx+b\Rightarrow f(\phi(x))=\sum_{i=1}^n\alpha_
 \end{align*}\tag{3.4}</script><p>可以取映射 $\phi_1(x_i)=(a_1^2,\sqrt2a_1a_2,a_2^2)^T$ 则可以将原样本空间映射到三维空间，得到的结果与上式中第二个式子类似；</p>
 <p>取映射 $\phi_2(x_i)=(a_1^2,\sqrt2a_1a_2,a_2^2,\sqrt2 a_1,\sqrt2 a_2, 1)^T$ 则可以将原样本空间映射到五维空间，得到的结果与上式中第三个式子类似。</p>
 <p>考虑如果继续增大 $d$，那么如果我们通过原始的方法先映射到特征空间则需要映射到更多的维度，而如果用核函数则不存在这个维度爆炸的问题。</p>
-<h5 id="高斯核"><a href="#高斯核" class="headerlink" title="高斯核"></a>高斯核</h5><p>高斯核又称高斯径向基函数(radial basis function，FBF)，该核函数可以将原始的样本空间映射到无穷维，其形式如下所示</p>
+<h5 id="高斯核"><a href="#高斯核" class="headerlink" title="高斯核"></a>高斯核</h5><p>高斯核又称高斯径向基函数(radial basis function，RBF)，该核函数可以将原始的样本空间映射到无穷维，其形式如下所示</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 \\
