@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BFmbBbmK2J.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/3CjGJaBC3l.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/fDH5e763Hf.png?imageslim">
-<meta property="og:updated_time" content="2018-03-13T02:26:25.718Z">
+<meta property="og:updated_time" content="2018-03-13T15:00:46.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM">
 <meta name="twitter:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开">
@@ -385,7 +385,7 @@
         <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开<a id="more"></a>。并通过将新的样本映射到同一空间，基于它们落在超平面的哪一侧来预测其所属的类别。除了进行线性分类之外，SVM还可以使用核方法有效地进行非线性分类，将其输入隐式映射到高维特征空间中。</p>
 <h3 id="线性可分"><a href="#线性可分" class="headerlink" title="线性可分"></a>线性可分</h3><p>给定线性可分的训练数据集 $(x,y)$，通过间隔最大化得到分离的超平面为 $w^T x+b=0$，称之为 $(w, b)$，相应的分类决策函数为称之为线性可分支持向量机，如式(2.1)所示。</p>
 <script type="math/tex; mode=display">
-f(x) = \mbox{sign}(w^Tx+b)\tag{2.1}</script><p>对于二分类问题，超平面要做的事情是将样本分开，而两类对应的函数值在超平面的符号正好相反，所以假设 $y$​ 的标签为 $\pm1$，其优点是可以直观感受，并且推导的时候更加简便。</p>
+f(x) = \mbox{sign}(w^Tx+b)\tag{2.1}</script><p>​对于二分类问题，超平面要做的事情是将样本分开，而两类对应的函数值在超平面的符号正好相反，所以假设 $y$ 的标签为 $\pm1$，其优点是可以直观感受，并且推导的时候更加简便。</p>
 <p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim" style="zoom:65%"></p>
 <p>定义 $yf(x)$ 为函数间隔，当样本正确分类的时候 $yf(x) \geqslant 0$，但是我们不能最大化这个函数间隔，因为当超平面 $(w,b)$ 确定时，等比例放大 $w$ 和 $b$ 得到的函数间隔会以相同的比例增大，而超平面 $(kw,kb)$ 却还是之前的超平面。所以便引出了几何间隔</p>
 <script type="math/tex; mode=display">
@@ -683,7 +683,7 @@ y_i f(x_i) - 1 \geqslant 0\
 <script type="math/tex; mode=display">
 \begin{align*}
 \min_{w,b}\quad&\frac{1}{2} \left \| w \right \|^2 + C\sum_{i=1}^n\xi_i\\
-\mbox{s.t.}\quad& y_i(x^Tx_i + b) \geq 1-\xi_i, \quad i=1,2,\cdots,n\\
+\mbox{s.t.}\quad& y_i(w^Tx_i + b) \geq 1-\xi_i, \quad i=1,2,\cdots,n\\
 &\xi_i \geq 0, \quad i=1,2,\cdots,n
 \end{align*}\tag{5.1}</script><p>对于该目标函数我们还可以理解为带 $L_2$ 正则的Hinge损失。我们先看一下Hinge函数的定义</p>
 <script type="math/tex; mode=display">
@@ -755,21 +755,21 @@ L(\alpha,{\alpha}'_i,\mu)=&\sum_{i=1}^n\left[ \left({\alpha}'_i-\alpha_i\right)y
 \end{cases}\tag{6.10}</script><p>分析KKT条件可以看出当 $(f(x_i)-y_i-\varepsilon -\xi_i)=0$ 时，样本点落在下侧间隔带上，当 $f(x_i)-y_i-\varepsilon+\xi_i)=0$ 时样本点落在上侧间隔带上。由于样本点不可能同时落在下侧和上侧间隔带上，所以 $\alpha_i$ 和 ${\alpha} ‘_i$ 中必有一个为0。与求解SVM类似求解该对偶问题即可求解出 $\alpha$ 以及 ${\alpha} ‘_i$，然后再求出 $w$ 及 $b$。此外我们根据式(6.5)可以得到SVR的解的形式为</p>
 <script type="math/tex; mode=display">
 f(x)=\sum_{i=1}^n({\alpha} '_i-\alpha_i)x_i^Tx+b\tag{6.11}</script><p>可以看到SVR也可以表示成核函数的形式。 </p>
-<h3 id="拉格朗日对偶性"><a href="#拉格朗日对偶性" class="headerlink" title="拉格朗日对偶性"></a>拉格朗日对偶性</h3><h4 id="原始问题"><a href="#原始问题" class="headerlink" title="原始问题"></a>原始问题</h4><p>假设 $f(x)$，$g_i(x)$，$h_j(x)$ 是定义在 $\mathbf{R}^n$上的连续可微函数，考虑约束的最优化问题</p>
+<h3 id="拉格朗日对偶性"><a href="#拉格朗日对偶性" class="headerlink" title="拉格朗日对偶性"></a>拉格朗日对偶性</h3><h4 id="原始问题"><a href="#原始问题" class="headerlink" title="原始问题"></a>原始问题</h4><p>假设 $f(x)$，$c_i(x)$，$h_j(x)$ 是定义在 $\mathbf{R}^n$上的连续可微函数，考虑约束的最优化问题（原始问题）</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 \min_{x \in \mathbf{R}^n}\quad & f(x) \tag{7.1}\\
 
 \mbox{s.t.}\quad
-&g_i(x) \leqslant 0, \quad  i=1,2,\cdots,k \tag{7.2}\\
+&c_i(x) \leqslant 0, \quad  i=1,2,\cdots,k \tag{7.2}\\
 &h_j(x) = 0, \quad j=1,2,\cdots,l\tag{7.3}
 \end{align*}</script><p>引进拉格朗日函数</p>
 <script type="math/tex; mode=display">
-L(x, \alpha, \beta) = f(x) + \sum_{i=1}^{k} \alpha_i g_i(x) + \sum_{j=1}^{l} \beta_j h_j(x),\ \alpha_i \geqslant 0\tag{7.4}</script><p>将关于 $x​$ 的函数 $\Theta_P(x)​$ 称为原始问题：</p>
+L(x, \alpha, \beta) = f(x) + \sum_{i=1}^{k} \alpha_i c_i(x) + \sum_{j=1}^{l} \beta_j h_j(x),\ \alpha_i \geqslant 0\tag{7.4}</script><p>将关于 $x$ 的函数 $\Theta_P(x)$ ：</p>
 <script type="math/tex; mode=display">
-\Theta_P(x) = \max_{\alpha, \beta: \alpha_i \geqslant 0} L(x, \alpha, \beta)\tag{7.5}</script><p>假设给定某个 $x​$，若 $x​$ 违反原始问题的约束条件，即存在某个约束 $i​$ 使得 $g_i(x) &gt; 0​$ 或者某个 $j​$ 使得 $h_j(x)=0​$，我们可以分别让 $\alpha_i \rightarrow +\infty​$，$\beta_j h_j(x) \rightarrow +\infty​$ 而其余的 $\alpha​$ 和 $\beta​$ 都取为 0，则 $\Theta_P(x)=+\infty​$；相反如 $x​$ 满足约束条件，则 $\Theta_P(x)=f(x)​$。所以对于</p>
+\Theta_P(x) = \max_{\alpha, \beta: \alpha_i \geqslant 0} L(x, \alpha, \beta)\tag{7.5}</script><p>假设给定某个 $x$，若 $x$ 违反原始问题的约束条件，即存在某个约束 $i$ 使得 $c_i(x) &gt; 0$ 或者某个 $j$ 使得 $h_j(x)=0$，我们可以分别让 $\alpha_i \rightarrow +\infty$，$\beta_j h_j(x) \rightarrow +\infty$ 而其余的 $\alpha$ 和 $\beta$ 都取为 0，则 $\Theta_P(x)=+\infty$；相反如 $x$ 满足约束条件，则 $\Theta_P(x)=f(x)$。所以对于</p>
 <script type="math/tex; mode=display">
-\min_{x} \Theta_P(x) = \min_{x}  \max_{\alpha, \beta: \alpha_i \geqslant 0} L(x, \alpha, \beta)\tag{7.6}</script><p>来说其与原始我们想要求解的问题是等价的，原始问题便被我们转化成了极小极大问题。我们定义 $p^*​$ 为原始问题的最优解。</p>
+\min_{x} \Theta_P(x) = \min_{x}  \max_{\alpha, \beta: \alpha_i \geqslant 0} L(x, \alpha, \beta)\tag{7.6}</script><p>来说其与原始我们想要求解的问题是等价的，原始问题便被我们转化成了极小极大问题。我们定义 $p^*$ 为原始问题的最优解。</p>
 <h4 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h4><p>有时候解原始问题是非常困难的，所以通常可以通过求解对偶问题而得到原始问题的解。对偶问题的定义如下所示：</p>
 <script type="math/tex; mode=display">
 \max_{\alpha, \beta: \alpha_i \geqslant 0} \Theta_D(x) = \max_{\alpha, \beta: \alpha_i \geqslant 0} \min_{x}   L(x, \alpha, \beta)\tag{7.7}</script><p>这样问题就由原来的极小极大问题转化成了极大极小问题。我们定义 $\max_{\alpha, \beta: \alpha_i \geqslant 0} \Theta_D(x)​$ 为原始问题的对偶问题，$d^*​$为对偶问题的最优解。</p>
@@ -788,16 +788,22 @@ d^* = p^*\tag{7.12}</script><p>那么什么时候强对偶性成立呢，这就�
 <li>主问题为凸优化问题，$f(x)$ 是凸函数，$g_i(x)$ 是<a href="https://zh.wikipedia.org/wiki/%E5%87%B8%E5%87%BD%E6%95%B0" target="_blank" rel="external">凸函数</a>，$h_j(x)$ 是<a href="https://baike.baidu.com/item/%E4%BB%BF%E5%B0%84%E5%87%BD%E6%95%B0/9276178?fr=aladdin" target="_blank" rel="external">仿射函数</a>，且其可行域中至少有一点使不等式约束严格成立。</li>
 </ul>
 <p>在满足Slater条件下，强对偶性成立，通过求解对偶问题，主问题也可以解决了。可以看到我们通过求解对偶问题的最优解 $\alpha$ 和 $\beta$，然后在通过 $\alpha$ 和 $\beta$ 能得到原始问题的最优解 $x$。</p>
-<h4 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h4><p><strong>KKT</strong> (Karush-Kuhn-Tucker) 条件是判断在优化问题中(约束条件含有等式约束以及不等式约束) $x^*$ 是否为最优解的必要条件。</p>
+<h4 id="KKT条件"><a href="#KKT条件" class="headerlink" title="KKT条件"></a>KKT条件</h4><p><strong>KKT</strong> (Karush-Kuhn-Tucker) 条件是判断在优化问题中(约束条件含有等式约束以及不等式约束) $x^<em>$ 和 $\alpha^</em>,\beta^*$ 分别是原始问题和对偶问题的解的充分必要条件。</p>
 <script type="math/tex; mode=display">
 \begin{cases}
-\bigtriangledown f(x)+ \sum_{i=1}^k \alpha_i \bigtriangledown g_i(x) + \sum_{j=1}^l \beta_j \bigtriangledown h_j(x) = 0\\
+\bigtriangledown_x L(x^*,\alpha^*,\beta^*) = 0\\
 \\
-\alpha_ig_i(x)=0\\
+\bigtriangledown_\alpha L(x^*,\alpha^*,\beta^*)  = 0\\
+\\
+\bigtriangledown_\beta L(x^*,\alpha^*,\beta^*)  = 0\\
+\\
+\alpha_ic_i(x)=0\\
+\\
+c_i(x)\leq0\\
 \\
 \alpha_i \geqslant 0\\
 \\
-h_j(x) = 0
+h_j(x)=0
 \end{cases}\tag{7.13}</script><h5 id="等式约束问题"><a href="#等式约束问题" class="headerlink" title="等式约束问题"></a>等式约束问题</h5><p>为了便于理解我尽量使用上述提到的符号，在讨论KKT条件前我们先讨论等式约束问题：</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -813,62 +819,46 @@ L(x, \beta) = f(x) + \sum_{j=1}^l \beta_j h_j(x)\tag{7.16}</script><p>然后通�
 \min_{x}\quad & f(x) \tag{7.17}\\
 
 \mbox{s.t.}\quad
-&g_i(x) \leq 0, \quad  i=1,2,\cdots,k\tag{7.18}
-\end{align*}</script><p>对于上述不等式约束问题我们可以通过引入松弛变量 $ c_i^2$ 将其转化为等式约束问题。</p>
+&c_i(x) \leq 0, \quad  i=1,2,\cdots,k\tag{7.18}
+\end{align*}</script><p>对于上述不等式约束问题我们可以通过引入松弛变量 $ \xi_i^2$ 将其转化为等式约束问题。</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-&h_i(x, c_i) = g_i(x) + c_i^2 = 0\\
+&h_i(x, c_i) = c_i(x) + \xi_i^2 = 0\\
 \end{align*}\tag{7.19}</script><p>同样引入拉格朗日乘子 $\alpha$，构建拉格朗日函数</p>
 <script type="math/tex; mode=display">
-L(x, \alpha, c) = f(x) + \sum_{i=1}^k \alpha_i (g_i(x) + c_i^2)\tag{7.18}</script><p>同样对其求导可得</p>
+L(x, \alpha, c) = f(x) + \sum_{i=1}^k \alpha_i (c_i(x) + \xi_i^2)\tag{7.18}</script><p>同样对其求导可得</p>
 <script type="math/tex; mode=display">
 \begin{cases}
-\frac{\partial L}{\partial x} = \bigtriangledown f(x)+ \sum_{i=1}^k \alpha_i \bigtriangledown g_i(x) = 0\\
+\frac{\partial L}{\partial x} = \bigtriangledown f(x)+ \sum_{i=1}^k \alpha_i \bigtriangledown c_i(x) = 0\\
 \\
-\frac{\partial L}{\partial \alpha_i} = g_i(x) + c_i^2=0\\
+\frac{\partial L}{\partial \alpha_i} = c_i(x) + \xi_i^2=0\\
 \\
-\frac{\partial L}{\partial c_i} = 2 \alpha_i c_i = 0\\
+\frac{\partial L}{\partial \xi_i} = 2 \alpha_i \xi_i = 0\\
 \\
 \alpha_i \geqslant 0
 \end{cases} \tag{7.19}</script><p>观察上式第三个等式，可分为两种情况：</p>
 <ul>
-<li>$\alpha_i = 0$，$c_i \neq 0$，即乘子为 0，约束 $g_i(x)$ 不起作用，且根据第二个式子 $g_i(x) &lt; 0$</li>
-<li>$\alpha_i \geqslant 0$，$c_i = 0$，即松弛变量为 0，约束 $g_i(x)$ 起作用，且根据第二个式子$g_i(x) = 0$ </li>
+<li>$\alpha_i = 0$，$\xi_i \neq 0$，即乘子为 0，约束 $c_i(x)$ 不起作用，且根据第二个式子 $c_i(x) &lt; 0$</li>
+<li>$\alpha_i \geqslant 0$，$\xi_i = 0$，即松弛变量为 0，约束 $c_i(x)$ 起作用，且根据第二个式子$c_i(x) = 0$ </li>
 </ul>
 <p>所以第三个等式和第二个等式可以合并成一个等式，合并后的式子便成为不等式约束优化问题的KKT条件</p>
 <script type="math/tex; mode=display">
 \begin{cases}
-\bigtriangledown f(x)+ \sum_{i=1}^k \alpha_i \bigtriangledown g_i(x) = 0\\
-\\
-\alpha_ig_i(x)=0\\
-\\
-\alpha_i \geqslant 0
-\end{cases}\tag{7.20}</script><p>当然我们还得讲讲为什么要求 $\alpha\geq0$。设 ${x} ‘$ 是 $x$ 领域上的点，即</p>
-<script type="math/tex; mode=display">
-{x} ' = x + \Delta x\tag{7.21}</script><p>则根据 $g_i(x)\leq0​$ 以及 $g_i(x + \Delta x)=g_i(x)+\bigtriangledown g_i(x)\Delta x ​$可得</p>
-<script type="math/tex; mode=display">
-\bigtriangledown g_i(x)\Delta x \leq 0\tag{7.22}</script><p>此外由于</p>
-<script type="math/tex; mode=display">
-f(x + \Delta x)=f(x)+\bigtriangledown f(x)\Delta x\tag{7.23}</script><p>根据上式可得为了在点 $x​$ 处取得极小值 $\bigtriangledown f(x)\Delta x \geq 0​$，而我们KKT条件中第一个式子可得</p>
-<script type="math/tex; mode=display">
-\bigtriangledown f(x)\Delta x = -\sum_{i=1}^n\alpha_i\bigtriangledown g_i(x)\Delta x\tag{7.24}</script><p>所以 $\alpha_i \geq 0​$。<br>综上所述，当既有等式约束又有不等式约束时就有了我们之前所说的KTT条件。</p>
-<h5 id="统计学习方法上的KKT"><a href="#统计学习方法上的KKT" class="headerlink" title="统计学习方法上的KKT"></a>统计学习方法上的KKT</h5><p>在统计学习方法中的KKT条件为</p>
-<script type="math/tex; mode=display">
-\begin{cases}
-\bigtriangledown L(x) = 0\\
-\\
-\bigtriangledown L(\alpha) = 0\\
-\\
-\bigtriangledown L(\beta) = 0\\
+\bigtriangledown f(x)+ \sum_{i=1}^k \alpha_i \bigtriangledown c_i(x) = 0\\
 \\
 \alpha_ic_i(x)=0\\
 \\
-c_i(x)\leq0\\
-\\
-\alpha_i \geqslant 0\\
-\\
-h_j(x)=0
-\end{cases}\tag{7.25}</script><p>别看这个约束很长实际上跟我们推导出来的东西是一样的，该条件中的前三个式子即我们这里求解的 $x​$ 时对 $x​$ 以及引入的拉格朗日乘子求导，第四个式子对应 $\alpha_ig_i(x)=0​$，第五个式子其实就是我们一开始的约束条件 $g_i(x)\leq0​$，剩下的在形式上也一样了。</p>
+\alpha_i \geqslant 0
+\end{cases}\tag{7.20}</script><p>当然我们还得讲讲为什么要求 $\alpha\geq0$。设 ${x}^*$ 是 $x$ 领域上的点，即</p>
+<script type="math/tex; mode=display">
+{x}^* = x + \Delta x\tag{7.21}</script><p>则根据 $c_i(x)\leq0$ 以及 $c_i(x + \Delta x)=c_i(x)+\bigtriangledown c_i(x)\Delta x $可得</p>
+<script type="math/tex; mode=display">
+\bigtriangledown c_i(x)\Delta x \leq 0\tag{7.22}</script><p>此外由于</p>
+<script type="math/tex; mode=display">
+f(x + \Delta x)=f(x)+\bigtriangledown f(x)\Delta x\tag{7.23}</script><p>根据上式可得为了在点 $x​$ 处取得极小值 $\bigtriangledown f(x)\Delta x \geq 0​$，而我们KKT条件中第一个式子可得</p>
+<script type="math/tex; mode=display">
+\bigtriangledown f(x)\Delta x = -\sum_{i=1}^n\alpha_i\bigtriangledown c_i(x)\Delta x\tag{7.24}</script><p>所以 $\alpha_i \geq 0$。</p>
+<p>综上所述，当既有等式约束又有不等式约束时就有了我们之前所说的KTT条件（式7.13）。</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC, SVR</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> KFold, train_test_split</div><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris, load_boston</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, mean_squared_error</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_data</span><span class="params">(dataset)</span>:</span></div><div class="line">    feat = dataset.data</div><div class="line">    target = dataset.target</div><div class="line"></div><div class="line">    <span class="comment"># print dataset info</span></div><div class="line">    print(<span class="string">'feature shape: '</span>, feat.shape)</div><div class="line">    print(<span class="string">'feature names: '</span>, dataset.feature_names)</div><div class="line">    print(<span class="string">'target shape: '</span>, target.shape)</div><div class="line">    <span class="keyword">if</span> hasattr(dataset, <span class="string">'target_names'</span>):</div><div class="line">        print(<span class="string">'target names: '</span>, dataset.target_names)</div><div class="line"></div><div class="line">    trainX, testX, trainY, testY = train_test_split(feat, target, test_size=<span class="number">0.2</span>, random_state=<span class="number">6</span>)</div><div class="line">    train_data = &#123;<span class="string">'feat'</span>: trainX, <span class="string">'target'</span>: trainY&#125;</div><div class="line">    test_data = &#123;<span class="string">'feat'</span>: testX, <span class="string">'target'</span>: testY&#125;</div><div class="line">    print(<span class="string">'train feature shape: '</span>, trainX.shape)</div><div class="line">    print(<span class="string">'test feature shape: '</span>, testX.shape)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> train_data, test_data</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="comment"># support vector classification</span></div><div class="line">    iris = load_iris()</div><div class="line">    iris_train, iris_test = process_data(breast_cancer)</div><div class="line"></div><div class="line">    svc_model = SVC()</div><div class="line">    svc_model.fit(iris_train[<span class="string">'feat'</span>], iris_train[<span class="string">'target'</span>])</div><div class="line">    svc_predict = svc_model.predict(iris_test[<span class="string">'feat'</span>])</div><div class="line">    svc_score = accuracy_score(svc_predict, iris_test[<span class="string">'target'</span>])</div><div class="line">    print(<span class="string">'svc accuracy: '</span>, svc_score)</div><div class="line"></div><div class="line">    <span class="comment"># support vector regression</span></div><div class="line">    boston = load_boston()</div><div class="line">    boston_train, boston_test = process_data(boston)</div><div class="line"></div><div class="line">    svr_model = SVR()</div><div class="line">    svr_model.fit(boston_train[<span class="string">'feat'</span>], boston_train[<span class="string">'target'</span>])</div><div class="line">    svr_predict = svr_model.predict(boston_test[<span class="string">'feat'</span>])</div><div class="line">    svr_score = mean_squared_error(svr_predict, boston_test[<span class="string">'target'</span>])</div><div class="line">    print(<span class="string">'svr accuracy: '</span>, svr_score)</div></pre></td></tr></table></figure>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://book.douban.com/subject/10590856/" target="_blank" rel="external">统计学习方法-李航</a></p>
 <p><a href="https://book.douban.com/subject/26708119/" target="_blank" rel="external">机器学习-周志华</a></p>
@@ -1060,7 +1050,7 @@ h_j(x)=0
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分"><span class="nav-number">2.</span> <span class="nav-text">线性可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大间隔"><span class="nav-number">2.1.</span> <span class="nav-text">最大间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题求解"><span class="nav-number">2.2.</span> <span class="nav-text">问题求解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#转化原始问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">转化原始问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SMO求解对偶问题"><span class="nav-number">2.2.2.</span> <span class="nav-text">SMO求解对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#二次规划求解"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">二次规划求解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算偏移项b"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">计算偏移项b</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#选择变量"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">选择变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性不可分"><span class="nav-number">3.</span> <span class="nav-text">线性不可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#核函数"><span class="nav-number">3.1.</span> <span class="nav-text">核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多项式核"><span class="nav-number">3.1.1.</span> <span class="nav-text">多项式核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高斯核"><span class="nav-number">3.1.2.</span> <span class="nav-text">高斯核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他核函数"><span class="nav-number">3.1.3.</span> <span class="nav-text">其他核函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软间隔"><span class="nav-number">4.</span> <span class="nav-text">软间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hinge损失"><span class="nav-number">5.</span> <span class="nav-text">Hinge损失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持向量回归"><span class="nav-number">6.</span> <span class="nav-text">支持向量回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日对偶性"><span class="nav-number">7.</span> <span class="nav-text">拉格朗日对偶性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题"><span class="nav-number">7.1.</span> <span class="nav-text">原始问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题"><span class="nav-number">7.2.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题与对偶问题"><span class="nav-number">7.3.</span> <span class="nav-text">原始问题与对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KKT条件"><span class="nav-number">7.4.</span> <span class="nav-text">KKT条件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#等式约束问题"><span class="nav-number">7.4.1.</span> <span class="nav-text">等式约束问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不等式约束问题"><span class="nav-number">7.4.2.</span> <span class="nav-text">不等式约束问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#统计学习方法上的KKT"><span class="nav-number">7.4.3.</span> <span class="nav-text">统计学习方法上的KKT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">8.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性可分"><span class="nav-number">2.</span> <span class="nav-text">线性可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大间隔"><span class="nav-number">2.1.</span> <span class="nav-text">最大间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题求解"><span class="nav-number">2.2.</span> <span class="nav-text">问题求解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#转化原始问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">转化原始问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SMO求解对偶问题"><span class="nav-number">2.2.2.</span> <span class="nav-text">SMO求解对偶问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#二次规划求解"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">二次规划求解</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#计算偏移项b"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">计算偏移项b</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#选择变量"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">选择变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性不可分"><span class="nav-number">3.</span> <span class="nav-text">线性不可分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#核函数"><span class="nav-number">3.1.</span> <span class="nav-text">核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多项式核"><span class="nav-number">3.1.1.</span> <span class="nav-text">多项式核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高斯核"><span class="nav-number">3.1.2.</span> <span class="nav-text">高斯核</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他核函数"><span class="nav-number">3.1.3.</span> <span class="nav-text">其他核函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软间隔"><span class="nav-number">4.</span> <span class="nav-text">软间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hinge损失"><span class="nav-number">5.</span> <span class="nav-text">Hinge损失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持向量回归"><span class="nav-number">6.</span> <span class="nav-text">支持向量回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日对偶性"><span class="nav-number">7.</span> <span class="nav-text">拉格朗日对偶性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题"><span class="nav-number">7.1.</span> <span class="nav-text">原始问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题"><span class="nav-number">7.2.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原始问题与对偶问题"><span class="nav-number">7.3.</span> <span class="nav-text">原始问题与对偶问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KKT条件"><span class="nav-number">7.4.</span> <span class="nav-text">KKT条件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#等式约束问题"><span class="nav-number">7.4.1.</span> <span class="nav-text">等式约束问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不等式约束问题"><span class="nav-number">7.4.2.</span> <span class="nav-text">不等式约束问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">8.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
