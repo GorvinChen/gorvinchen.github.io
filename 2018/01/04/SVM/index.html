@@ -94,18 +94,18 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/04/SVM/index.html">
 <meta property="og:site_name" content="陈光伟">
 <meta property="og:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开">
-<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BgfHGCAaDH.png?imageslim">
+<meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/21Alf66cmE.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/hg5ac8bF7f.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BFmbBbmK2J.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/3CjGJaBC3l.png?imageslim">
 <meta property="og:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/fDH5e763Hf.png?imageslim">
-<meta property="og:updated_time" content="2018-03-13T02:12:55.431Z">
+<meta property="og:updated_time" content="2018-03-13T02:26:25.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM">
 <meta name="twitter:description" content="简介支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开">
-<meta name="twitter:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BgfHGCAaDH.png?imageslim">
+<meta name="twitter:image" content="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim">
 
 
 
@@ -385,8 +385,8 @@
         <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>支持向量机（support vector machine，SVM）是在分类与回归分析中的有监督学习模型。对于二分类问题，SVM将样本表示为空间中的点，通过超平面将样本正确分类且尽可能宽的间隔分开<a id="more"></a>。并通过将新的样本映射到同一空间，基于它们落在超平面的哪一侧来预测其所属的类别。除了进行线性分类之外，SVM还可以使用核方法有效地进行非线性分类，将其输入隐式映射到高维特征空间中。</p>
 <h3 id="线性可分"><a href="#线性可分" class="headerlink" title="线性可分"></a>线性可分</h3><p>给定线性可分的训练数据集 $(x,y)$，通过间隔最大化得到分离的超平面为 $w^T x+b=0$，称之为 $(w, b)$，相应的分类决策函数为称之为线性可分支持向量机，如式(2.1)所示。</p>
 <script type="math/tex; mode=display">
-f(x) = \mbox{sign}(w^Tx+b)\tag{2.1}</script><p>对于二分类问题一般假设 $y$ 的标签为 $\pm 1$，在实际问题中我们一般是取 $0$ 或者 $1$，当然也可以取其他的值，但究其根本来说对于超平面要做的事情只是将样本分开，而两类对应的函数值在超平面的符号正好相反，所以取 $\pm1$ 优点是可以直观感受，并且推导的时候更加简便。从下面两张图中可以看出来二者的差别仅仅是要求的分类超平面平移，而具体的推导过程其实并无太大差别，所以在这里我们也让 $y$ 的取值为 $\pm1$。</p>
-<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/BgfHGCAaDH.png?imageslim" style="zoom:70%"></p>
+f(x) = \mbox{sign}(w^Tx+b)\tag{2.1}</script><p>对于二分类问题，超平面要做的事情是将样本分开，而两类对应的函数值在超平面的符号正好相反，所以假设 $y$​ 的标签为 $\pm1$，其优点是可以直观感受，并且推导的时候更加简便。</p>
+<p><img src="http://p2l71rzd4.bkt.clouddn.com/blog-image/180115/mEGcBBf2fD.png?imageslim" style="zoom:65%"></p>
 <p>定义 $yf(x)$ 为函数间隔，当样本正确分类的时候 $yf(x) \geqslant 0$，但是我们不能最大化这个函数间隔，因为当超平面 $(w,b)$ 确定时，等比例放大 $w$ 和 $b$ 得到的函数间隔会以相同的比例增大，而超平面 $(kw,kb)$ 却还是之前的超平面。所以便引出了几何间隔</p>
 <script type="math/tex; mode=display">
  \frac{yf(x)}{\left \| w \right \|}\tag{2.2}</script><p>其中 ${\left | w \right |}$ 表示 $L_2$ 范数。实际上这个几何间隔就是分类正确的点到直线距离公式。某条样本来说，该样本离超平面的间隔越大则分类的置信度越高，为了使分类的置信度尽量高，我们可以最大化几何间隔。然而对于样本空间中任意点 $x_i$ 到超平面都有一个几何间隔，那么我们到底最大化哪些点的几何间隔呢？</p>
