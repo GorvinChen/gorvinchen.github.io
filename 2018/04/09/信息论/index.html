@@ -1,0 +1,839 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="熵,互信息," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="信息熵的起源信息熵的作用是来量化信息，若一件不可能发生的事情发生了，相对于可能或者大概率发生的事情发生了来说，我们收到的信息前者更多，必然事件对我们来说几乎没有信息。所以我们可以通过信息$x$的概率分布$p(x)$来表达信息量$h(x)$。">
+<meta name="keywords" content="熵,互信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/信息论/index.html">
+<meta property="og:site_name" content="陈光伟">
+<meta property="og:description" content="信息熵的起源信息熵的作用是来量化信息，若一件不可能发生的事情发生了，相对于可能或者大概率发生的事情发生了来说，我们收到的信息前者更多，必然事件对我们来说几乎没有信息。所以我们可以通过信息$x$的概率分布$p(x)$来表达信息量$h(x)$。">
+<meta property="og:updated_time" content="2018-03-19T23:58:22.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息论">
+<meta name="twitter:description" content="信息熵的起源信息熵的作用是来量化信息，若一件不可能发生的事情发生了，相对于可能或者大概率发生的事情发生了来说，我们收到的信息前者更多，必然事件对我们来说几乎没有信息。所以我们可以通过信息$x$的概率分布$p(x)$来表达信息量$h(x)$。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/09/信息论/"/>
+
+
+
+
+
+  <title> 信息论 | 陈光伟 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?73df29d2013644d2ca9cd21eefcb68c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈光伟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Chen Guangwei</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/09/信息论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈光伟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈光伟">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                信息论
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T23:40:41+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ML/" itemprop="url" rel="index">
+                    <span itemprop="name">ML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="信息熵的起源"><a href="#信息熵的起源" class="headerlink" title="信息熵的起源"></a>信息熵的起源</h3><p>信息熵的作用是来量化信息，若一件不可能发生的事情发生了，相对于可能或者大概率发生的事情发生了来说，我们收到的信息前者更多，必然事件对我们来说几乎没有信息。所以我们可以通过信息$x$的概率分布$p(x)$来表达信息量$h(x)$。<a id="more"></a>通过以上的例子我们知道$h(\cdot)$具有如下的<strong>特点</strong>：</p>
+<p>对于不相关的$x$和$y$，$h(x,y)=h(x)+h(y)$，而我们知道对于概率分布来说，若$x$和$y$相互独立，那么$p(x,y)=p(x) \cdot p(y)$，所以我们就想到了通过$-log_2p(x)$来表示$h(x)$，其中的负号是为了使信息量非负。这样概率低的事件就有了更高的信息量，为了方便$log$的底数取2，此时的$h(x)$单位为$bits$。我们将随机变量$x$的信息量称为熵</p>
+<script type="math/tex; mode=display">
+\text{H}(x) = -\sum_x{p(x) \cdot \log_2p(x)}</script><p>假设随机变量$X$有8种取值，每种的概率相等，则传输$X$需要$H(X) = -8 \cdot \frac{1}{8} \cdot \log_2{\frac{1}{8}} = 3\ bits$。现在假设8种取值$\{a,b,c,d,e,f,g,h\}$的概率为：$\{\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64}\}$，对这8中取值进行哈夫曼编码得到其对应的编码为：$\{0,10,110,1110,111100,111101,111110,111111\}$，其平均编码长度为2$bits$。我们可以看出熵是编码随机变量状态的最小比特量，且非均匀分布的熵值要小于均匀分布。</p>
+<h3 id="熵在统计力学的起源"><a href="#熵在统计力学的起源" class="headerlink" title="熵在统计力学的起源"></a>熵在统计力学的起源</h3><p>考虑将$N$个相同的物品分配到一些盒子中，$n_i$表示在第$i$个盒子中分配到了$n_i$个物品，则一共有$N!$种分配的方式，若我们不考虑每个盒子中的分配顺序，则分配的方式一共有</p>
+<script type="math/tex; mode=display">
+W = \frac{N!}{\prod_i n_i! }</script><p>而熵则是对其取对数后归一化的结果，$\text{H}=\frac{1}{N}\cdot \ln W = \frac{1}{N} \cdot \ln N! - \frac{1}{N} \cdot \sum_i{\ln{n_i!}}$，而由于$\ln N! \simeq  N \cdot \ln N - N,\ if\ N \rightarrow \infty $，则</p>
+<script type="math/tex; mode=display">
+\text{H} = -\lim_{N \rightarrow \infty} \sum{\frac{n_i}{N} \cdot \ln{\frac{n_i}{N}} = -\sum_i{p_i \cdot \ln p_i}}</script><p>在物理学术语中，盒子中的具体分配称为微观状态，而整体分配称为宏观状态。其中$W$也被称为宏观状态的权重。</p>
+<h3 id="均匀分布时熵最大"><a href="#均匀分布时熵最大" class="headerlink" title="均匀分布时熵最大"></a>均匀分布时熵最大</h3><script type="math/tex; mode=display">
+\text{H}(p) = -\sum_i{p(x_i) \cdot \ln p(x_i)}</script><p>根据拉格朗日乘数法得到：</p>
+<script type="math/tex; mode=display">
+\tilde{\text{H}} = -\sum_i{p(x_i) \cdot \ln p(x_i)} + \lambda \cdot (\sum_i{p(x_i)}-1)</script><script type="math/tex; mode=display">
+\begin{cases}
+\frac{\partial \tilde{H}}{\partial p(x_i)} = -\ln p(x_i) - 1 + \lambda = 0\\ 
+\\ 
+\sum_i{p(x_i)} = 1 \end{cases}</script><p>所以$p(x_i) = \frac{1}{N}$，其中$N$为$X$的取值个数，所以这是一个均匀分布，至于是最大值还是最小值我们可以通过对$p(x_i)$求二阶偏导</p>
+<script type="math/tex; mode=display">
+\frac{\partial \tilde{H}}{\partial p(x_i) \partial p(x_j) } = -I_{ij} \cdot \frac{1}{p(x_i)}<0</script><p>其中$I_{ij}$是单位矩阵，所以最后得到的应该是最大值。</p>
+<h3 id="连续性随机变量的熵"><a href="#连续性随机变量的熵" class="headerlink" title="连续性随机变量的熵"></a>连续性随机变量的熵</h3><p>将随机变量$X$的取值等量划分，假设每份为$\bigtriangleup$，则每份的概率为</p>
+<script type="math/tex; mode=display">
+\int _{i \cdot \bigtriangleup}^{(i+1) \cdot \bigtriangleup} p(x)dx = p(x_i) \cdot \bigtriangleup</script><p>熵便转化成了</p>
+<script type="math/tex; mode=display">
+\text{H}_\bigtriangleup = -\sum_i{p(x_i) \cdot \bigtriangleup \cdot \ln(p(x_i) \cdot \bigtriangleup )} = -\sum_i{p(x_i) \cdot \bigtriangleup \cdot \ln p(x_i)} - \ln\bigtriangleup</script><p>省略公式最右边的$\ln\bigtriangleup$，考虑极限$\bigtriangleup \rightarrow 0$，公式右边的第一项就变成了$p(x) \cdot \ln p(x)$的积分，即</p>
+<script type="math/tex; mode=display">
+\lim_{\bigtriangleup \rightarrow 0}\{-\sum{p(x_i) \bigtriangleup \ln p(x_i)}\} = -\int p(x) \ln p(x)dx</script><p>其中，右侧的量被称为微分熵，可以看到熵的离散形式与连续形式的差是$\ln\bigtriangleup$，而这在极限$\bigtriangleup \rightarrow 0$的情况下发散。这反映了一个事实：<strong>具体化一个连续变量需要大量的比特位</strong>。对于定义在多元连续变量$\mathbf{x}$上的概率密度，微分熵为</p>
+<script type="math/tex; mode=display">
+\text{H}[\mathbf{x}] = - \int p(\mathbf{x}) \ln p(\mathbf{x}) d\mathbf{x}</script><p>在离散分布的情况下，最大熵对应于均匀分布，而在连续分布下，最大熵对应着什么呢，我们可以先引入三个限制：</p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{\infty} p(x) dx = 1</script><script type="math/tex; mode=display">
+\int_{-\infty}^{\infty} xp(x) dx = \mu</script><script type="math/tex; mode=display">
+\int_{-\infty}^{\infty} (x - \mu)^2p(x) dx = \sigma ^2</script><p>根据拉格朗日乘数法</p>
+<script type="math/tex; mode=display">
+\tilde{\text{H}} = -\int_{-\infty}^{\infty}{p(x) \ln p(x) dx} + \lambda_1(\int_{-\infty}^{\infty} p(x) dx - 1) + \lambda_2(\int_{-\infty}^{\infty} xp(x) dx - \mu) + \lambda_3(\int_{-\infty}^{\infty} (x - \mu)^2p(x) dx - \sigma ^2)</script><p>通过变分法，令这个函数的导数等于0得到</p>
+<script type="math/tex; mode=display">
+p(x) = \exp\{-1 + \lambda_1 + \lambda_2x + \lambda_3(x - \mu)^2\}</script><p>将这个结果带入三个限制方程中，得到</p>
+<script type="math/tex; mode=display">
+p(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\{-\frac{(x - \mu)^2}{2\sigma^2}\}</script><p>所以连续分布最大微分熵的分布式高斯分布。在最大化熵的时候我们没有限制概率非负，但由于求出的概率分布确实非负，所以这种限制是不必要的。求高斯分布的微分熵，我们可以得到</p>
+<script type="math/tex; mode=display">
+\text{H}[x] = \frac{1}{2}\{1 + \ln(2\pi\sigma^2)\}</script><p>通过这个结果可以看到熵随着分布的宽度（$\sigma^2$）增加而增加，即越均匀熵越大；此外还表明了微分熵是可以为负的，当$\sigma^2 &lt; \frac{1}{2\pi e}$时，$H[X]&lt;0$</p>
+<p>此外假设我们有一个联合概率分布$p(\mathbf{x}, \mathbf{y})$，若从该分布中抽取一对$\mathbf{x}$和$\mathbf{y}$，当$\mathbf{x}$的值已知时，需要确定对应的$\mathbf{y}$值所需的附加信息就是$-\ln p(\mathbf{y}|\mathbf{x})$。因此用来确定$\mathbf{y}$值的平均附加信息可以写成</p>
+<script type="math/tex; mode=display">
+\text{H}[\mathbf{y} | \mathbf{x}] = -\int{\int{p(\mathbf{y}, \mathbf{x} \ln p(\mathbf{y}|\mathbf{x})) d\mathbf{y}}d\mathbf{x}}</script><p>这被称为在$\mathbf{x}$给定的情况下，$\mathbf{y}$的条件熵，由乘积法则很容易看出</p>
+<script type="math/tex; mode=display">
+\text{H}[\mathbf{x} , \mathbf{y}] = \text{H}[\mathbf{y} | \mathbf{x}] + \text{H}[\mathbf{x}]</script><h3 id="相对熵"><a href="#相对熵" class="headerlink" title="相对熵"></a>相对熵</h3><p>考虑一个未知的分布$p(\mathbf{x})$，假设我们使用一个近似的分布$q(\mathbf{x})$对其建模，若要用$q(\mathbf{x})$编码$\mathbf{x}$发送给接收者，则由于$q(\mathbf{x})$不是真实分布，需要附加信息，而平均的附加信息可以表示为如下所示的公式，单位为$nats$</p>
+<script type="math/tex; mode=display">
+\text{KL}(p||q) = -\int p(\mathbf{x}) \ln q(\mathbf{x}) d\mathbf{x} - (-\int p(\mathbf{x}) \ln p(\mathbf{x})d\mathbf{x}) = -\int p(\mathbf{x}) \ln{\frac{q(\mathbf{x})}{p(\mathbf{x})}d\mathbf{x}}</script><p>上式称为分布$p(\mathbf{x})$和分布$q(\mathbf{x})$相对熵或者KL散度。下面证明$KL(p||q)\geqslant0$：</p>
+<p>对于凸函数$f(x)$满足Jenson不等式，该等式可以通过归纳法证明</p>
+<script type="math/tex; mode=display">
+f(\sum_{i=1}^{M}\lambda_i x_i) \leqslant \sum_{i=1}^{M} \lambda_i f(x_i)</script><p>若将$\lambda_i$看成是取值为${x_i}$的离散变量$x$的概率分布，那么上式就可以表示为$f(\mathbf{E}[x]) \leqslant \mathbf{E}[f(x)]$，其中$\mathbf{E}[\cdot]$表示期望。对于连续变量，Jenson不等式的形式为</p>
+<script type="math/tex; mode=display">
+f(\int \mathbf{x} p(\mathbf{x}) d\mathbf{x}) \leqslant \int f(\mathbf{x}) p(\mathbf{x}) d\mathbf{x}</script><p>将其应用于KL散度，并利用$-\ln x$为凸函数，以及$\int q(\mathbf{x}) d\mathbf{x} = 1$可以得到</p>
+<script type="math/tex; mode=display">
+\text{KL}(p||q) =-\int p(\mathbf{x}) \ln{\frac{q(\mathbf{x})}{p(\mathbf{x})}d\mathbf{x}} \geqslant -\ln \int q(\mathbf{x}) d\mathbf{x} = 0</script><p>由于$-\ln x$为严格凸函数，因此只有当$q(\mathbf{x}) = p(\mathbf{x})$对于所有的$\mathbf{x}$都成立时，等号才成立，因此可以把KL散度看做两个分布$p(\mathbf{x})$和 $q(\mathbf{x})$之间不相似的程度。</p>
+<h4 id="为何我们会用最大似然函数来近似估计分布"><a href="#为何我们会用最大似然函数来近似估计分布" class="headerlink" title="为何我们会用最大似然函数来近似估计分布"></a>为何我们会用最大似然函数来近似估计分布</h4><p>假设数据通过未知分布$p(\mathbf{x})$生成，我们想要对其建模，我们可以试着用一些参数分布$q(\mathbf{x} | \mathbf{\theta})$来近似这个分布。确定$\mathbf{\theta}$的一种方法是最小化$p(\mathbf{x})$和$q(\mathbf{x} | \mathbf{\theta})$的KL散度，然而我们并不知道$p(\mathbf{x})$，但我们可以假设我们观测到了服从分布$p(\mathbf{x})$的一些点$\mathbf{x}_n$，其中$n=1,…,N$，则$p(\mathbf{x})$的期望就可以通过这些点来得到</p>
+<script type="math/tex; mode=display">
+\mathbf{E}[f] = \int p(x)f(x)dx \simeq \frac{1}{N}\sum_{n=1}^{N}f(x_n)</script><script type="math/tex; mode=display">
+\text{KL}(p||q) \simeq \frac{1}{N} \sum_{n=1}^{N} \{-\ln q(\mathbf{x}_n|\mathbf{\theta}) + \ln p(\mathbf{x}_n)\}</script><p>从公式中我们可以看到第二项实际上与$\mathbf{\theta}$无关，而第一项是使用分布$q(\mathbf{x} | \mathbf{\theta})$估计训练集的负对数似然函数，所以最小化KL散度等价于最大化似然函数。</p>
+<h3 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a>互信息</h3><p>考虑由$p(\mathbf{x}, \mathbf{y})$给出的两个变量$\mathbf{x}$和$\mathbf{y}$组成的数据集，若变量相互独立，则$p(\mathbf{x}, \mathbf{y}) = p(\mathbf{x})p(\mathbf{y})$；若变量不是相互独立，那我们就可以通过其联合概率分布与边缘概率分布乘积之间的KL散度来判断其是否相互独立，而此时的KL散度为</p>
+<script type="math/tex; mode=display">
+\text{I} [\mathbf{x}, \mathbf{y}] \equiv \text{KL}(p(\mathbf{x}, \mathbf{y}) || p(\mathbf{x})p(\mathbf{y})) = -\int p(\mathbf{x}, \mathbf{y}) \ln \frac{p(\mathbf{x}, \mathbf{y})}{p(\mathbf{x}, \mathbf{y})} d\mathbf{x}d\mathbf{y}</script><p>而KL散度这种特殊的形式被称为互信息，而根据KL散度的性质$\text{I} [\mathbf{x}, \mathbf{y}] \geqslant 0$当且仅当$\mathbf{x}$和$\mathbf{y}$相互独立时成立。通过概率分布的$sum\ and\ product\ rules$可以看到互信息和条件熵之间的关系为</p>
+<script type="math/tex; mode=display">
+\text{I}[\mathbf{x}, \mathbf{y}] \equiv \text{H}[\mathbf{x}] - \text{H}[\mathbf{x}|\mathbf{y}] = \text{H}[\mathbf{y}] - \text{H}[\mathbf{y}|\mathbf{x}]</script><p>因此我们可以将互信息当成由于知道$\mathbf{y}$值而使得$\mathbf{x}$的不确定性减小，或者说知道$\mathbf{x}$的值而使得$\mathbf{y}$的不确定性减小。从贝叶斯角度来看，我们可以将$p(\mathbf{x})$看成是$\mathbf{x}$的先验概率，而$p(\mathbf{x} | \mathbf{y})$看做是观测到新数据$\mathbf{y}$的后验概率。因此互信息表示的是新的观测$\mathbf{y}$造成的$\mathbf{x}$的不确定性减小。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/熵/" rel="tag"># 熵</a>
+          
+            <a href="/tags/互信息/" rel="tag"># 互信息</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/09/windows本地项目上传github/" rel="prev" title="Windows本地项目同步到Github">
+                Windows本地项目同步到Github <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="陈光伟" />
+          <p class="site-author-name" itemprop="name">陈光伟</p>
+           
+              <p class="site-description motion-element" itemprop="description">陈光伟的Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息熵的起源"><span class="nav-number">1.</span> <span class="nav-text">信息熵的起源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#熵在统计力学的起源"><span class="nav-number">2.</span> <span class="nav-text">熵在统计力学的起源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#均匀分布时熵最大"><span class="nav-number">3.</span> <span class="nav-text">均匀分布时熵最大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续性随机变量的熵"><span class="nav-number">4.</span> <span class="nav-text">连续性随机变量的熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相对熵"><span class="nav-number">5.</span> <span class="nav-text">相对熵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为何我们会用最大似然函数来近似估计分布"><span class="nav-number">5.1.</span> <span class="nav-text">为何我们会用最大似然函数来近似估计分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互信息"><span class="nav-number">6.</span> <span class="nav-text">互信息</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈光伟</span>
+  
+</div>
+
+<div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次 | 
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+</body>
+</html>
